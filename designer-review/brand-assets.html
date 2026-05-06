@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B2BEA Brand Assets</title>
+  <link rel="stylesheet" href="../b2bea.css">
+  <style>
+    body { background: #f5f5f5; }
+    .asset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .asset-card { padding: 1.25rem; }
+    .asset-preview { display: grid; min-height: 180px; place-items: center; border-radius: var(--b2bea-radius-sm); background: #fff; border: 1px solid var(--b2bea-color-border); }
+    .asset-preview--dark { background: var(--b2bea-color-primary); }
+    .asset-preview img { max-height: 110px; object-fit: contain; }
+    .asset-meta { margin-top: 0.875rem; color: var(--b2bea-color-muted); font-size: 0.875rem; }
+    .asset-meta code { color: var(--b2bea-color-primary); }
+  </style>
+</head>
+<body data-register="operational">
+  <main class="b2bea-page">
+    <header class="b2bea-page-hero">
+      <div class="b2bea-page-hero__inner">
+        <h1>B2BEA Brand Assets</h1>
+        <p>Official logo variants for review. Use these files from this repo or Brett's Cloudflare account.</p>
+      </div>
+    </header>
+
+    <section class="b2bea-section">
+      <div class="b2bea-container">
+        <div class="asset-grid">
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview"><img src="../logos/horizontal/default.png" alt="B2BEA horizontal default"></div>
+            <div class="asset-meta"><strong>Horizontal Default</strong><br><code>logos/horizontal/default.png</code></div>
+          </article>
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview asset-preview--dark"><img src="../logos/horizontal/gray-white.png" alt="B2BEA horizontal gray and white"></div>
+            <div class="asset-meta"><strong>Horizontal Gray/White</strong><br><code>logos/horizontal/gray-white.png</code></div>
+          </article>
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview"><img src="../logos/horizontal/dark-blue-white.png" alt="B2BEA horizontal dark blue and white"></div>
+            <div class="asset-meta"><strong>Horizontal Dark Blue/White</strong><br><code>logos/horizontal/dark-blue-white.png</code></div>
+          </article>
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview"><img src="../logos/default/dark-blue-white.png" alt="B2BEA default dark blue and white"></div>
+            <div class="asset-meta"><strong>Default Dark Blue/White</strong><br><code>logos/default/dark-blue-white.png</code></div>
+          </article>
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview asset-preview--dark"><img src="../logos/default/gray-white.png" alt="B2BEA default gray and white"></div>
+            <div class="asset-meta"><strong>Default Gray/White</strong><br><code>logos/default/gray-white.png</code></div>
+          </article>
+          <article class="b2bea-card asset-card">
+            <div class="asset-preview"><img src="../logos/default/vertical-stacked.png" alt="B2BEA vertical stacked"></div>
+            <div class="asset-meta"><strong>Vertical Stacked</strong><br><code>logos/default/vertical-stacked.png</code></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+

@@ -149,6 +149,14 @@
       "b2bea-logo--stacked"
     ]
   },
+  "designerReviewPack": [
+    "designer-review/designer-brief.md",
+    "designer-review/visual-inventory.md",
+    "designer-review/component-state-matrix.md",
+    "designer-review/page-family-checklist.md",
+    "designer-review/brand-assets.html",
+    "designer-review/design-board.html"
+  ],
   "metadataContract": {
     "seo": [
       "meta title",

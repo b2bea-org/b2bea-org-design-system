@@ -35,6 +35,19 @@ The official logo files are stored locally in `logos/` and uploaded to R2 under 
 | `design-system.json` | Compact manifest for colors, fonts, logos, Cloudflare, and usage defaults. |
 | `examples/standard-page.html` | Static example showing the system in use. |
 
+## Designer Review Pack
+
+Start here when altering the system:
+
+| File | Purpose |
+|---|---|
+| `designer-review/designer-brief.md` | Context, audience, boundaries, and desired outcome. |
+| `designer-review/visual-inventory.md` | Inventory of foundations, components, states, and page families. |
+| `designer-review/component-state-matrix.md` | Required production states for buttons, fields, search, cards, tables, and page states. |
+| `designer-review/page-family-checklist.md` | Review checklist for actual B2BEA.org page families. |
+| `designer-review/brand-assets.html` | Visual board of official logo assets. |
+| `designer-review/design-board.html` | Editable visual board for colors, components, and page miniatures. |
+
 ## Usage
 
 ```html
@@ -47,4 +60,3 @@ Run the local audit:
 ```bash
 npm run audit
 ```
-

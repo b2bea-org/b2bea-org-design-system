@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B2BEA Design Review Board</title>
+  <link rel="stylesheet" href="../b2bea.css">
+  <style>
+    body { background: #f5f5f5; }
+    .board-section { margin-bottom: 2rem; }
+    .board-title { color: var(--b2bea-color-primary); font-size: 1.25rem; margin: 0 0 1rem; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .swatch { overflow: hidden; }
+    .swatch__color { height: 84px; }
+    .swatch__meta { padding: 0.875rem; font-size: 0.875rem; }
+    .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .component-card { padding: 1.25rem; }
+    .stack { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    .form-grid { display: grid; gap: 0.75rem; }
+    .table-demo { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .table-demo th, .table-demo td { border-bottom: 1px solid var(--b2bea-color-border); padding: 0.75rem; text-align: left; }
+    .table-demo th { color: var(--b2bea-color-primary); font-weight: 800; }
+    .mini-page { overflow: hidden; padding: 0; }
+    .mini-page__hero { background: var(--b2bea-color-primary); color: white; padding: 1.5rem; }
+    .mini-page__hero h3 { margin: 0; font-size: 1.5rem; }
+    .mini-page__body { padding: 1.25rem; }
+  </style>
+</head>
+<body data-register="operational">
+  <main class="b2bea-page">
+    <header class="b2bea-page-hero">
+      <div class="b2bea-page-hero__inner">
+        <img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/gray-white.png" alt="B2BEA">
+        <h1>Design Review Board</h1>
+        <p>Editable visual board for refining the B2BEA.org Lovable design system.</p>
+      </div>
+    </header>
+
+    <section class="b2bea-section">
+      <div class="b2bea-container">
+        <section class="board-section">
+          <h2 class="board-title">Color Tokens</h2>
+          <div class="swatches">
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#00196C"></div><div class="swatch__meta"><strong>Primary</strong><br>#00196C</div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#EB5444"></div><div class="swatch__meta"><strong>Accent</strong><br>#EB5444</div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#F5F5F5"></div><div class="swatch__meta"><strong>Surface</strong><br>#F5F5F5</div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#1A1A1A"></div><div class="swatch__meta"><strong>Text</strong><br>#1A1A1A</div></article>
+          </div>
+        </section>
+
+        <section class="board-section">
+          <h2 class="board-title">Core Components</h2>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Buttons</h3>
+              <div class="stack">
+                <a class="b2bea-button b2bea-button--primary" href="#">Primary</a>
+                <a class="b2bea-button b2bea-button--accent" href="#">Accent</a>
+                <a class="b2bea-button b2bea-button--outline" href="#">Outline</a>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Fields</h3>
+              <div class="form-grid">
+                <input class="b2bea-field" type="text" placeholder="Text field">
+                <input class="b2bea-search" type="search" placeholder="Search">
+                <select class="b2bea-select"><option>Select option</option></select>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Pills + Badges</h3>
+              <div class="stack">
+                <span class="b2bea-pill b2bea-pill--active">Active</span>
+                <span class="b2bea-pill">Inactive</span>
+                <span class="b2bea-badge">Featured</span>
+                <span class="b2bea-status">Draft</span>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Table Density</h3>
+              <table class="table-demo">
+                <thead><tr><th>Name</th><th>Status</th><th>Owner</th></tr></thead>
+                <tbody>
+                  <tr><td>Vendor profile</td><td><span class="b2bea-pill b2bea-pill--active">Live</span></td><td>B2BEA</td></tr>
+                  <tr><td>Survey</td><td><span class="b2bea-pill">Draft</span></td><td>Admin</td></tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </section>
+
+        <section class="board-section">
+          <h2 class="board-title">Page Family Miniatures</h2>
+          <div class="component-grid">
+            <article class="b2bea-card mini-page">
+              <div class="mini-page__hero"><h3>Standard Public Page</h3></div>
+              <div class="mini-page__body">
+                <input class="b2bea-search" type="search" placeholder="Search directory">
+                <p><span class="b2bea-pill b2bea-pill--active">All</span> <span class="b2bea-pill">Commerce</span></p>
+              </div>
+            </article>
+
+            <article class="b2bea-card mini-page">
+              <div class="mini-page__body">
+                <span class="b2bea-badge">Operational</span>
+                <h3>Admin / Portal Surface</h3>
+                <p>Compact, clear, and built for repeated work.</p>
+                <a class="b2bea-button b2bea-button--primary" href="#">Review queue</a>
+              </div>
+            </article>
+
+            <article class="b2bea-card mini-page">
+              <div class="mini-page__body">
+                <span class="b2bea-badge">Profile</span>
+                <h3>Vendor Profile</h3>
+                <p>Public vendor profiles are V1. Company profiles are not.</p>
+                <span class="b2bea-status">Published</span>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+
