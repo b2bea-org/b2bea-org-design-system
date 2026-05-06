@@ -1,0 +1,7 @@
+name = "b2bea-org-design-system"
+account_id = "3333630b9c90c49aef56730d9513c19f"
+compatibility_date = "2026-05-06"
+
+[[r2_buckets]]
+binding = "B2BEA_DESIGN_ASSETS"
+bucket_name = "b2bea-guest-packs"

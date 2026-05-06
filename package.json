@@ -1,0 +1,13 @@
+{
+  "name": "b2bea-org-design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-executable Lovable-era design system for B2BEA.org.",
+  "scripts": {
+    "audit": "node checks/audit-b2bea.js ."
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

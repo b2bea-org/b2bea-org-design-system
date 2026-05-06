@@ -1,0 +1,219 @@
+{
+  "name": "B2BEA.org Lovable Design System",
+  "version": "0.1.0",
+  "purpose": "AI-executable design contract for the B2BEA.org rebuild and Lovable-era page system.",
+  "css": "b2bea.css",
+  "registers": {
+    "public_standard": {
+      "useFor": [
+        "non-home public pages",
+        "directory pages",
+        "topic pages",
+        "academy pages",
+        "events pages",
+        "jobs pages",
+        "survey and form landing pages"
+      ],
+      "mood": "clear, trusted, structured, practitioner-focused",
+      "requiredSignals": [
+        "blue page header with clear title",
+        "short useful subtitle when needed",
+        "search/filter toolbar where discovery is expected",
+        "consistent cards, pills, fields, and empty states"
+      ],
+      "typography": {
+        "display": "Open Sans",
+        "body": "Open Sans",
+        "ui": "Open Sans",
+        "machine": "JetBrains Mono"
+      }
+    },
+    "operational": {
+      "useFor": [
+        "B2BEA Admin",
+        "member dashboard and profile",
+        "vendor management portal",
+        "company workspace",
+        "account and auth surfaces"
+      ],
+      "mood": "compact, calm, production, work-focused",
+      "requiredSignals": [
+        "current state",
+        "owner or account context",
+        "clear next action",
+        "status pills and lifecycle state",
+        "error, loading, and empty states"
+      ],
+      "typography": {
+        "display": "Open Sans",
+        "body": "Open Sans",
+        "ui": "Open Sans",
+        "machine": "JetBrains Mono"
+      }
+    },
+    "custom_html": {
+      "useFor": [
+        "custom landing pages",
+        "custom resources",
+        "sponsored campaign pages",
+        "special conversion pages"
+      ],
+      "mood": "custom but still governed",
+      "requiredSignals": [
+        "declared owner",
+        "declared route",
+        "metadata contract",
+        "analytics hook",
+        "approved logo usage"
+      ],
+      "typography": {
+        "default": "Open Sans unless exception is approved"
+      }
+    }
+  },
+  "tokens": {
+    "colors": {
+      "primary": "#00196C",
+      "primaryHover": "#001458",
+      "accent": "#EB5444",
+      "accentHover": "#d94333",
+      "background": "#FFFFFF",
+      "surface": "#F5F5F5",
+      "card": "#FFFFFF",
+      "border": "#E0E3EA",
+      "text": "#1A1A1A",
+      "muted": "#647085"
+    },
+    "fontRoles": {
+      "display": "--b2bea-font-display",
+      "body": "--b2bea-font-body",
+      "ui": "--b2bea-font-ui",
+      "machine": "--b2bea-font-mono"
+    },
+    "componentPrefix": "b2bea-",
+    "radius": {
+      "default": "0.75rem",
+      "small": "0.5rem",
+      "pill": "999px"
+    },
+    "controls": {
+      "height": "2.5rem",
+      "fontSize": "0.875rem",
+      "focusRing": "0 0 0 3px rgba(0, 25, 108, 0.12)"
+    }
+  },
+  "components": {
+    "layout": [
+      "b2bea-container",
+      "b2bea-page",
+      "b2bea-section",
+      "b2bea-page-hero",
+      "b2bea-toolbar",
+      "b2bea-grid"
+    ],
+    "typography": [
+      "b2bea-title",
+      "b2bea-subtitle",
+      "b2bea-label",
+      "b2bea-prose"
+    ],
+    "actions": [
+      "b2bea-button",
+      "b2bea-button--primary",
+      "b2bea-button--accent",
+      "b2bea-button--outline",
+      "b2bea-button--ghost"
+    ],
+    "inputs": [
+      "b2bea-field",
+      "b2bea-search",
+      "b2bea-select",
+      "b2bea-textarea"
+    ],
+    "signals": [
+      "b2bea-pill",
+      "b2bea-pill--active",
+      "b2bea-badge",
+      "b2bea-status"
+    ],
+    "surfaces": [
+      "b2bea-card",
+      "b2bea-panel",
+      "b2bea-table",
+      "b2bea-empty",
+      "b2bea-alert"
+    ],
+    "brand": [
+      "b2bea-logo",
+      "b2bea-logo--horizontal",
+      "b2bea-logo--stacked"
+    ]
+  },
+  "metadataContract": {
+    "seo": [
+      "meta title",
+      "meta description",
+      "canonical URL",
+      "index/noindex flag",
+      "robots behavior",
+      "slug",
+      "H1",
+      "primary topic/category",
+      "structured data type where applicable",
+      "sitemap inclusion flag",
+      "redirect rule when URL changes"
+    ],
+    "geo": [
+      "LLM answer summary",
+      "entity/topic tags",
+      "audience",
+      "industry/category context",
+      "key facts",
+      "source/author attribution",
+      "last reviewed date",
+      "content freshness rule",
+      "FAQ/question-answer fields where applicable",
+      "citation/source fields where applicable"
+    ],
+    "social": [
+      "Open Graph title",
+      "Open Graph description",
+      "Open Graph image",
+      "Twitter/X card type",
+      "social share image alt text",
+      "LinkedIn-safe summary",
+      "fallback image by page family"
+    ]
+  },
+  "forbiddenPatterns": [
+    "oversized standard page titles outside approved hero contexts",
+    "legacy Hanken Grotesk on target Lovable pages",
+    "negative letter spacing in controls or standard page headings",
+    "mixed field radii and one-off form styles",
+    "marketing-scale heroes inside admin, portal, profile, or workspace surfaces",
+    "cards nested inside cards",
+    "unstyled browser default form controls",
+    "custom pages without SEO, GEO, social, and analytics metadata",
+    "public practitioner company profile pages in V1"
+  ],
+  "qualityBar": [
+    "Every in-scope page has a recognizable Lovable header or operational shell.",
+    "Fields, search, selects, filters, buttons, pills, and cards match the token contract.",
+    "Standard page titles use clamp(2.25rem, 4vw, 3.75rem).",
+    "Admin and portal surfaces are compact and work-focused.",
+    "No public page publishes without SEO, GEO, social, indexing, and analytics metadata.",
+    "Mobile text wraps without overlap or horizontal scrolling.",
+    "Official B2BEA logos are used from this repo or Brett's Cloudflare account only."
+  ],
+  "audit": {
+    "script": "checks/audit-b2bea.js",
+    "checks": [
+      "b2bea.css is loaded",
+      "one register is declared",
+      "required metadata is present for public pages",
+      "forbidden legacy fonts and oversized headings are reported",
+      "rogue fields/buttons/cards are reported",
+      "logo references use declared assets"
+    ]
+  }
+}

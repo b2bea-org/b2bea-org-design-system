@@ -1,0 +1,100 @@
+{
+  "brand": "b2bea",
+  "version": "0.1.0",
+  "css": "b2bea.css",
+  "ai_contract": "b2bea.design.json",
+  "cloudflare": {
+    "account_name": "Brett Sinclair DNS",
+    "account_id": "3333630b9c90c49aef56730d9513c19f",
+    "asset_bucket": "b2bea-guest-packs",
+    "asset_namespace": "design-system/logos",
+    "rule": "Always use Brett's Cloudflare account for B2BEA.org assets."
+  },
+  "colors": {
+    "primary": "#00196C",
+    "primary_dark": "#001458",
+    "accent": "#EB5444",
+    "accent_dark": "#d94333",
+    "background": "#FFFFFF",
+    "surface": "#F5F5F5",
+    "text": "#1A1A1A",
+    "muted": "#647085",
+    "border": "#E0E3EA"
+  },
+  "fonts": {
+    "display": "Open Sans",
+    "body": "Open Sans",
+    "ui": "Open Sans",
+    "machine": "JetBrains Mono"
+  },
+  "logos": {
+    "default": {
+      "dark_blue_white": {
+        "local": "logos/default/dark-blue-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/default/dark-blue-white.png"
+      },
+      "dark_orange_white": {
+        "local": "logos/default/dark-orange-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/default/dark-orange-white.png"
+      },
+      "black_gray": {
+        "local": "logos/default/black-gray.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/default/black-gray.png"
+      },
+      "gray_white": {
+        "local": "logos/default/gray-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/default/gray-white.png"
+      },
+      "vertical_stacked": {
+        "local": "logos/default/vertical-stacked.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/default/vertical-stacked.png"
+      }
+    },
+    "horizontal": {
+      "default": {
+        "local": "logos/horizontal/default.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/horizontal/default.png"
+      },
+      "dark_blue_white": {
+        "local": "logos/horizontal/dark-blue-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/horizontal/dark-blue-white.png"
+      },
+      "dark_orange_white": {
+        "local": "logos/horizontal/dark-orange-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/horizontal/dark-orange-white.png"
+      },
+      "black_gray": {
+        "local": "logos/horizontal/black-gray.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/horizontal/black-gray.png"
+      },
+      "gray_white": {
+        "local": "logos/horizontal/gray-white.png",
+        "r2_bucket": "b2bea-guest-packs",
+        "r2_key": "design-system/logos/horizontal/gray-white.png"
+      }
+    }
+  },
+  "usage": {
+    "light_template": {
+      "logo": "horizontal.dark_blue_white"
+    },
+    "dark_template": {
+      "logo": "horizontal.gray_white"
+    },
+    "compact": {
+      "logo": "default.dark_blue_white"
+    },
+    "favicon_candidate": {
+      "logo": "default.vertical_stacked"
+    }
+  }
+}
