@@ -1,0 +1,2831 @@
+<!DOCTYPE html>
+<!-- b2bea:audit=skip — parked Branch B reference (reference-led POC). Not part of the active contract surface. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B2BEA — UX Audit, Design System & Landing Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700;1,9..144,800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+:root {
+  /* ---- Color: brand ramps ---- */
+  --navy-50:  #EEF1F8;
+  --navy-100: #D6DEEE;
+  --navy-200: #A8B6D9;
+  --navy-300: #7286BD;
+  --navy-400: #3F5598;
+  --navy-500: #1F3580;   /* mid */
+  --navy-600: #122A75;   /* primary candidate */
+  --navy-700: #00196C;   /* brand primary (client lock) */
+  --navy-800: #001354;
+  --navy-900: #000A33;
+
+  --coral-50:  #FEF1ED;
+  --coral-100: #FDDDD0;
+  --coral-200: #FBB59E;
+  --coral-300: #F58D6C;
+  --coral-400: #F0704C;
+  --coral-500: #EB5444;   /* brand accent (client lock) */
+  --coral-600: #C73E32;
+  --coral-700: #9E2B25;
+  --coral-800: #761F1B;
+  --coral-900: #4F1411;
+
+  /* ---- Editorial surface tints (the warmth the current site lacks) ---- */
+  --peach-25:  #FFF7F2;
+  --peach-50:  #FDEBE0;
+  --peach-100: #FAD5C0;
+  --cream-25:  #FBF8F2;
+  --cream-50:  #F5EFE0;
+  --mint-25:   #EFF7F2;
+  --mint-50:   #DBEDE2;
+  --sky-25:    #F0F4FB;
+  --sky-50:    #DDE6F5;
+
+  /* ---- Neutrals ---- */
+  --ink-50:   #F7F7F5;   /* page surface */
+  --ink-100:  #ECECE8;
+  --ink-200:  #D8D8D2;
+  --ink-300:  #B6B6AE;
+  --ink-400:  #8C8C84;
+  --ink-500:  #5F5F58;
+  --ink-600:  #3E3E39;
+  --ink-700:  #2A2A26;
+  --ink-800:  #1A1A18;
+  --ink-900:  #0E0E0C;
+
+  /* ---- Semantic ---- */
+  --color-bg:               var(--ink-50);
+  --color-surface:          #FFFFFF;
+  --color-surface-subtle:   var(--peach-25);
+  --color-surface-warm:     var(--cream-25);
+  --color-surface-cool:     var(--sky-25);
+  --color-surface-mint:     var(--mint-25);
+  --color-surface-inverse:  var(--navy-700);
+
+  --color-text:             var(--ink-800);
+  --color-text-muted:       var(--ink-500);
+  --color-text-subtle:      var(--ink-400);
+  --color-text-on-inverse:  #FFFFFF;
+  --color-text-on-inverse-muted: rgba(255,255,255,0.72);
+
+  --color-brand:            var(--navy-700);
+  --color-brand-strong:     var(--navy-800);
+  --color-accent:           var(--coral-500);
+  --color-accent-strong:    var(--coral-600);
+  --color-link:             var(--navy-700);
+
+  --color-border:           rgba(14, 14, 12, 0.10);
+  --color-border-strong:    rgba(14, 14, 12, 0.18);
+  --color-border-inverse:   rgba(255, 255, 255, 0.18);
+  --color-focus-ring:       var(--coral-500);
+
+  --color-success: #1F7A3A;
+  --color-warning: #B36800;
+  --color-danger:  #B0271E;
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-sans:    'General Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* Type scale — display via clamp() for fluid */
+  --fs-display-3xl: clamp(3.4rem, 5vw + 1rem, 6.5rem);
+  --fs-display-2xl: clamp(2.6rem, 4vw + 0.8rem, 4.8rem);
+  --fs-display-xl:  clamp(2.2rem, 3vw + 0.7rem, 3.6rem);
+  --fs-display-lg:  clamp(1.8rem, 2vw + 0.7rem, 2.6rem);
+  --fs-heading-lg:  1.5rem;
+  --fs-heading:     1.25rem;
+  --fs-heading-sm:  1.125rem;
+  --fs-body-lg:     1.0625rem;
+  --fs-body:        0.9375rem;
+  --fs-body-sm:     0.8125rem;
+  --fs-eyebrow:     0.6875rem;
+
+  --lh-display: 0.96;
+  --lh-tight:   1.12;
+  --lh-snug:    1.32;
+  --lh-normal:  1.5;
+  --lh-loose:   1.7;
+
+  --ls-display: -0.03em;
+  --ls-tight:   -0.015em;
+  --ls-normal:  0;
+  --ls-eyebrow: 0.14em;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  /* ---- Spacing (4px grid) ---- */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ---- Radii ---- */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-xs: 0 1px 2px rgba(14, 14, 12, 0.06);
+  --shadow-sm: 0 2px 6px rgba(14, 14, 12, 0.06), 0 1px 2px rgba(14, 14, 12, 0.04);
+  --shadow-md: 0 8px 24px -8px rgba(14, 14, 12, 0.12), 0 2px 6px rgba(14, 14, 12, 0.04);
+  --shadow-lg: 0 24px 48px -16px rgba(14, 14, 12, 0.18), 0 4px 10px rgba(14, 14, 12, 0.05);
+  --shadow-xl: 0 40px 80px -24px rgba(0, 25, 108, 0.30);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.06);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 360ms;
+
+  /* ---- Layout ---- */
+  --container: 1240px;
+  --container-narrow: 960px;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+::selection { background: var(--coral-200); color: var(--navy-900); }
+
+/* =========================================================
+   UTILITY: SHELL
+   ========================================================= */
+.shell {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+.shell-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* =========================================================
+   DOC NAV (sticky)
+   ========================================================= */
+.docnav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(247,247,245,0.84);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+.docnav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.docnav-brand {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.docnav-brand span { color: var(--color-accent); }
+.docnav-links {
+  display: flex; gap: var(--space-5);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+}
+.docnav-links a {
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.docnav-links a:hover { color: var(--color-text); }
+@media (max-width: 720px) { .docnav-links { display: none; } }
+
+/* =========================================================
+   DOC SECTION HEADER
+   ========================================================= */
+.section {
+  padding: var(--space-24) 0;
+  scroll-margin-top: 80px;
+}
+.section + .section { border-top: 1px dashed var(--color-border); }
+
+.section-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 2vw + 0.8rem, 2.4rem);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+.section-lede {
+  max-width: 60ch;
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-snug);
+}
+
+/* =========================================================
+   DOC HERO
+   ========================================================= */
+.doc-hero {
+  background: var(--navy-700);
+  color: #fff;
+  padding: var(--space-20) 0 var(--space-24);
+  position: relative;
+  overflow: hidden;
+}
+.doc-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(235,84,68,0.35), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(63,85,152,0.6), transparent 60%);
+  pointer-events: none;
+}
+.doc-hero-inner { position: relative; z-index: 1; }
+.doc-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--coral-300);
+  margin-bottom: var(--space-6);
+}
+.doc-hero-eyebrow::before {
+  content: "";
+  width: 28px; height: 1px; background: var(--coral-300);
+}
+.doc-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-display-2xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  margin: 0 0 var(--space-6);
+  max-width: 18ch;
+}
+.doc-hero h1 em {
+  font-style: italic;
+  color: var(--coral-300);
+  font-weight: 400;
+}
+.doc-hero-sub {
+  max-width: 56ch;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-snug);
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 var(--space-10);
+}
+.doc-hero-toc {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+.doc-hero-toc a {
+  display: flex; align-items: baseline; gap: var(--space-3);
+  padding: var(--space-4);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border-inverse);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: #fff;
+  transition: background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.doc-hero-toc a:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+.doc-hero-toc-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  color: var(--coral-300);
+}
+.doc-hero-toc-label {
+  font-weight: 500;
+}
+
+/* =========================================================
+   AUDIT
+   ========================================================= */
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+@media (max-width: 720px) { .audit-grid { grid-template-columns: 1fr; } }
+.audit-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+.audit-item-tag {
+  display: inline-flex; align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral-600);
+  margin-bottom: var(--space-4);
+}
+.audit-item-tag::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--coral-500);
+}
+.audit-item.severity-high .audit-item-tag::before { background: var(--coral-500); }
+.audit-item.severity-med  .audit-item-tag { color: var(--color-warning); }
+.audit-item.severity-med  .audit-item-tag::before { background: var(--color-warning); }
+.audit-item.severity-low  .audit-item-tag { color: var(--ink-500); }
+.audit-item.severity-low  .audit-item-tag::before { background: var(--ink-400); }
+
+.audit-item h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-3);
+}
+.audit-item p {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-body);
+  line-height: var(--lh-snug);
+}
+.audit-item p:last-child { margin-bottom: 0; }
+.audit-item .fix {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text);
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-3);
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+.audit-positioning {
+  background: var(--color-surface-warm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  margin-bottom: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+}
+@media (max-width: 720px) { .audit-positioning { grid-template-columns: 1fr; padding: var(--space-6); } }
+.audit-positioning h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+}
+.audit-positioning h3 em { font-style: italic; color: var(--coral-600); }
+.audit-positioning .col p {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+}
+.audit-positioning .col .label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+/* =========================================================
+   TOKEN SHOWCASES
+   ========================================================= */
+.token-block { margin-bottom: var(--space-12); }
+.token-block h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-body-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-5);
+}
+
+/* Color ramps */
+.ramp { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; margin-bottom: var(--space-3); border-radius: var(--radius-md); overflow: hidden; }
+.ramp-step {
+  aspect-ratio: 1;
+  display: flex; align-items: flex-end;
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.85);
+}
+.ramp-step.dark { color: rgba(14,14,12,0.6); }
+.ramp-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  display: flex; justify-content: space-between;
+}
+
+/* Semantic chips */
+.semantic-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+.sem-chip {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body-sm);
+}
+.sem-swatch {
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.sem-chip code {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  display: block;
+}
+
+/* Type specimens */
+.type-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
+  align-items: baseline;
+  gap: var(--space-6);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; gap: var(--space-2); } }
+.type-row .role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+.type-row .specimen { color: var(--color-text); }
+.type-row .spec {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-subtle);
+  text-align: right;
+}
+@media (max-width: 720px) { .type-row .spec { text-align: left; } }
+
+.t-display-2xl { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-display-2xl); line-height: var(--lh-display); letter-spacing: var(--ls-display); }
+.t-display-xl  { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-display-xl);  line-height: var(--lh-display); letter-spacing: var(--ls-display); }
+.t-display-lg  { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-display-lg);  line-height: var(--lh-tight); letter-spacing: var(--ls-tight); }
+.t-heading-lg  { font-family: var(--font-sans);    font-weight: 600; font-size: var(--fs-heading-lg);  line-height: var(--lh-tight); letter-spacing: var(--ls-tight); }
+.t-heading     { font-family: var(--font-sans);    font-weight: 600; font-size: var(--fs-heading);     line-height: var(--lh-tight); letter-spacing: var(--ls-tight); }
+.t-body-lg     { font-family: var(--font-sans);    font-weight: 400; font-size: var(--fs-body-lg);     line-height: var(--lh-normal); }
+.t-body        { font-family: var(--font-sans);    font-weight: 400; font-size: var(--fs-body);        line-height: var(--lh-normal); }
+.t-body-sm     { font-family: var(--font-sans);    font-weight: 400; font-size: var(--fs-body-sm);     line-height: var(--lh-normal); }
+.t-eyebrow     { font-family: var(--font-mono);    font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--color-text-muted); }
+
+/* Spacing scale */
+.space-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+.space-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); }
+.space-bar { height: 16px; background: var(--coral-200); border-radius: var(--radius-xs); }
+.space-px { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-subtle); text-align: right; }
+
+/* Radius scale */
+.radius-row { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.radius-item { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.radius-box { width: 80px; height: 80px; background: var(--navy-700); }
+.radius-name { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); }
+
+/* Shadow scale */
+.shadow-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-6); }
+.shadow-item { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); }
+.shadow-box { width: 100%; aspect-ratio: 1.6/1; background: #fff; border-radius: var(--radius-md); }
+.shadow-name { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); }
+
+/* =========================================================
+   PRIMITIVES
+   ========================================================= */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+.demo-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.demo-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  margin-bottom: var(--space-4);
+}
+.demo-row {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.demo-row:last-child { margin-bottom: 0; }
+
+/* ---- Button ---- */
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(235,84,68,0.35);
+}
+.btn-primary {
+  background: var(--navy-700);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--navy-800); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-accent {
+  background: var(--coral-500);
+  color: #fff;
+}
+.btn-accent:hover { background: var(--coral-600); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-outline {
+  background: transparent;
+  color: var(--navy-700);
+  border-color: var(--navy-700);
+}
+.btn-outline:hover { background: var(--navy-700); color: #fff; }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+.btn-ghost:hover { background: var(--ink-100); }
+.btn-link {
+  background: transparent; padding: 0;
+  color: var(--navy-700);
+  border-radius: 0;
+  border-bottom: 1px solid currentColor;
+}
+.btn-link:hover { color: var(--coral-600); }
+.btn[disabled] {
+  opacity: 0.45; cursor: not-allowed; transform: none !important; box-shadow: none !important;
+}
+.btn-sm { padding: 0.5rem 0.875rem; font-size: var(--fs-body-sm); }
+.btn-lg { padding: 1rem 1.625rem; font-size: var(--fs-body-lg); }
+.btn-icon-right svg, .btn-icon-left svg { width: 16px; height: 16px; }
+
+/* ---- Field ---- */
+.field {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.field-label {
+  font-size: var(--fs-body-sm); font-weight: 500;
+  color: var(--color-text);
+}
+.field input[type="text"], .field input[type="email"], .field select, .field textarea {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  width: 100%;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--color-text-subtle); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--navy-700);
+  box-shadow: 0 0 0 3px rgba(0,25,108,0.12);
+}
+.field.error input { border-color: var(--color-danger); }
+.field.error .field-help { color: var(--color-danger); }
+.field-help {
+  font-size: var(--fs-body-sm); color: var(--color-text-muted);
+}
+.field-row { display: flex; gap: var(--space-3); }
+.field-row > * { flex: 1; }
+
+/* ---- Chips / Pills ---- */
+.chip {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 0.4rem 0.875rem;
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--ink-100);
+  color: var(--color-text);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.chip:hover { background: var(--ink-200); }
+.chip.is-active { background: var(--navy-700); color: #fff; }
+.chip.chip-accent { background: var(--coral-100); color: var(--coral-700); }
+.chip.chip-outline { background: transparent; border-color: var(--color-border-strong); }
+.chip.chip-outline:hover { border-color: var(--ink-700); }
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--navy-50);
+  color: var(--navy-700);
+}
+.badge-accent  { background: var(--coral-100); color: var(--coral-700); }
+.badge-success { background: #E3F1E8; color: var(--color-success); }
+.badge-warning { background: #FBEFD8; color: var(--color-warning); }
+.badge-danger  { background: #FBE3E0; color: var(--color-danger); }
+.badge-dark    { background: var(--ink-800); color: #fff; }
+.badge-outline { background: transparent; border: 1px solid var(--color-border-strong); color: var(--color-text); }
+
+/* ---- Avatar ---- */
+.avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--navy-100);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--navy-700); font-weight: 600; font-size: 0.875rem;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+.avatar-lg { width: 56px; height: 56px; font-size: 1.05rem; }
+.avatar-sm { width: 28px; height: 28px; font-size: 0.7rem; }
+.avatar-stack { display: inline-flex; }
+.avatar-stack .avatar + .avatar { margin-left: -10px; }
+
+/* ---- Divider / Rule ---- */
+.rule { height: 1px; background: var(--color-border); border: 0; margin: var(--space-6) 0; }
+
+/* =========================================================
+   COMPOSITE COMPONENTS
+   ========================================================= */
+
+/* ---- Persona Selector ---- */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
+}
+@media (max-width: 900px) { .persona-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.persona-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  cursor: pointer;
+  display: flex; flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none; color: inherit;
+  position: relative;
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.persona-card::after {
+  content: "→";
+  position: absolute;
+  bottom: var(--space-5); right: var(--space-5);
+  font-size: 1.1rem;
+  color: var(--color-text-subtle);
+  transition: transform var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.persona-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink-700);
+  box-shadow: var(--shadow-md);
+}
+.persona-card:hover::after { transform: translateX(3px); color: var(--coral-500); }
+
+.persona-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.persona-icon svg { width: 20px; height: 20px; }
+.persona-card[data-tone="navy"]  .persona-icon { background: var(--sky-50);   color: var(--navy-700); }
+.persona-card[data-tone="coral"] .persona-icon { background: var(--peach-50); color: var(--coral-700); }
+.persona-card[data-tone="mint"]  .persona-icon { background: var(--mint-50);  color: #1F6E45; }
+.persona-card[data-tone="cream"] .persona-icon { background: var(--cream-50); color: #7A5A1F; }
+.persona-card[data-tone="ink"]   .persona-icon { background: var(--ink-100);  color: var(--ink-700); }
+
+.persona-title {
+  font-family: var(--font-sans); font-weight: 600;
+  font-size: var(--fs-heading-sm);
+}
+.persona-desc {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+}
+
+/* ---- Resource Card ---- */
+.resource-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5);
+}
+@media (max-width: 900px) { .resource-grid { grid-template-columns: 1fr; } }
+
+.res-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.res-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.res-card-media {
+  aspect-ratio: 16/10;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6);
+  position: relative;
+}
+.res-card-media .label {
+  position: absolute; top: var(--space-4); left: var(--space-4);
+}
+.res-card-media-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: var(--lh-tight);
+  color: #fff;
+  letter-spacing: var(--ls-tight);
+}
+.res-card[data-tone="navy"]  .res-card-media { background: var(--navy-700); }
+.res-card[data-tone="coral"] .res-card-media { background: var(--peach-50); }
+.res-card[data-tone="coral"] .res-card-media-title { color: var(--navy-800); }
+.res-card[data-tone="mint"]  .res-card-media { background: var(--mint-50); }
+.res-card[data-tone="mint"]  .res-card-media-title { color: var(--navy-800); }
+.res-card[data-tone="cream"] .res-card-media { background: var(--cream-50); }
+.res-card[data-tone="cream"] .res-card-media-title { color: var(--navy-800); }
+
+.res-card-body {
+  padding: var(--space-5);
+  display: flex; flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+.res-card-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: var(--lh-tight);
+  margin: 0;
+}
+.res-card-desc {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+  margin: 0;
+}
+.res-card-meta {
+  display: flex; align-items: center; gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+}
+.res-card-meta .author { color: var(--color-text); font-weight: 500; }
+
+/* ---- Event Card ---- */
+.event-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+@media (max-width: 720px) { .event-card { grid-template-columns: 1fr; } }
+.event-date {
+  background: var(--navy-700);
+  color: #fff;
+  padding: var(--space-5);
+  display: flex; flex-direction: column; justify-content: center;
+  text-align: center;
+}
+.event-date .month {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--coral-300);
+}
+.event-date .day {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 3.6rem;
+  line-height: 1;
+  margin: var(--space-2) 0;
+}
+.event-date .year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  color: rgba(255,255,255,0.7);
+}
+.event-body {
+  padding: var(--space-6);
+  display: flex; flex-direction: column;
+  gap: var(--space-3);
+}
+.event-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+}
+.event-location {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.event-cta { margin-top: auto; }
+
+.event-test-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-16);
+}
+@media (max-width: 900px) {
+  .event-test-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Testimonial / Practitioner Quote ---- */
+.testimonial {
+  background: var(--peach-25);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-10);
+  align-items: center;
+}
+@media (max-width: 720px) { .testimonial { grid-template-columns: 1fr; padding: var(--space-8); } }
+.testimonial-quote {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2vw + 0.8rem, 2rem);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--navy-800);
+  margin: 0 0 var(--space-6);
+}
+.testimonial-quote em { font-style: italic; color: var(--coral-600); }
+.testimonial-attr {
+  display: flex; align-items: center; gap: var(--space-3);
+  border-top: 1px solid var(--coral-200);
+  padding-top: var(--space-4);
+}
+.testimonial-attr-name { font-weight: 600; font-size: var(--fs-body); }
+.testimonial-attr-role { font-size: var(--fs-body-sm); color: var(--color-text-muted); }
+.testimonial-photo {
+  aspect-ratio: 1;
+  background: var(--navy-300);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-photo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 50%),
+    linear-gradient(135deg, var(--navy-400), var(--navy-700));
+}
+.testimonial-photo::after {
+  /* Stylized portrait silhouette */
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 0; transform: translateX(-50%);
+  width: 70%; height: 80%;
+  background: var(--navy-800);
+  border-radius: 50% 50% 0 0 / 32% 32% 0 0;
+  opacity: 0.7;
+}
+
+/* ---- Stat Block ---- */
+.stat-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+@media (max-width: 720px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+
+.stat {
+  display: flex; flex-direction: column;
+  gap: var(--space-2);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+  color: var(--navy-700);
+}
+.stat-value em { font-style: italic; color: var(--coral-500); }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.stat-desc {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+  margin-top: var(--space-1);
+}
+
+/* ---- Podcast Row ---- */
+.pod-row {
+  background: var(--navy-700);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: var(--space-6);
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 720px) {
+  .pod-row { grid-template-columns: 1fr; text-align: center; }
+}
+.pod-row::before {
+  content: "";
+  position: absolute; right: -100px; top: 50%; transform: translateY(-50%);
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(235,84,68,0.25), transparent 60%);
+  pointer-events: none;
+}
+.pod-cover {
+  width: 80px; height: 80px;
+  background: var(--coral-500);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.pod-cover svg { width: 32px; height: 32px; color: #fff; }
+.pod-content { position: relative; z-index: 1; }
+.pod-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--coral-300);
+  margin-bottom: var(--space-2);
+}
+.pod-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-3);
+}
+.pod-desc { color: rgba(255,255,255,0.78); margin: 0; font-size: var(--fs-body); }
+.pod-actions { display: flex; gap: var(--space-3); flex-direction: column; position: relative; z-index: 1; }
+@media (max-width: 720px) { .pod-actions { flex-direction: row; justify-content: center; } }
+.pod-btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  text-decoration: none;
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.pod-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ---- Logo Wall ---- */
+.logo-wall-strip {
+  background: var(--navy-50);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+}
+.logo-wall-lede {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+.logo-wall {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-6);
+  align-items: center;
+}
+@media (max-width: 720px) { .logo-wall { grid-template-columns: repeat(3, 1fr); } }
+.logo-wall-item {
+  height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--navy-600);
+  opacity: 0.75;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Framework Visual ("Periodic Table" style) ---- */
+.framework {
+  background: var(--ink-900);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  position: relative;
+  overflow: hidden;
+}
+.framework::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(235,84,68,0.3), transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(0,25,108,0.6), transparent 60%);
+}
+.framework-header {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+.framework-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+  max-width: 16ch;
+}
+.framework-title em { font-style: italic; color: var(--coral-300); }
+.framework-key {
+  display: flex; gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.framework-key .kdot {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--fs-body-sm); color: rgba(255,255,255,0.78);
+}
+.framework-key .kdot::before {
+  content: ""; width: 10px; height: 10px; border-radius: 2px;
+}
+.framework-key .kdot.k-strategy::before { background: var(--coral-400); }
+.framework-key .kdot.k-research::before { background: var(--navy-300); }
+.framework-key .kdot.k-content::before { background: #B8D9C5; }
+.framework-key .kdot.k-launch::before { background: var(--cream-50); }
+
+.framework-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+}
+@media (max-width: 720px) { .framework-grid { grid-template-columns: repeat(6, 1fr); } }
+.f-cell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  padding: 8px 6px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.f-cell:hover { transform: scale(1.06); background: rgba(255,255,255,0.12); z-index: 2; }
+.f-cell .num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+}
+.f-cell .sym {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.f-cell.c-strategy { background: rgba(235,84,68,0.18); border-color: rgba(235,84,68,0.32); }
+.f-cell.c-research { background: rgba(168,182,217,0.14); border-color: rgba(168,182,217,0.32); }
+.f-cell.c-content  { background: rgba(184,217,197,0.12); border-color: rgba(184,217,197,0.32); }
+.f-cell.c-launch   { background: rgba(245,239,224,0.10); border-color: rgba(245,239,224,0.28); }
+
+/* =========================================================
+   THE LANDING PAGE
+   ========================================================= */
+.lp { position: relative; }
+.lp-flag {
+  position: sticky; top: 56px; z-index: 40;
+  background: var(--ink-900); color: #fff;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.lp-flag .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--coral-500); margin-right: var(--space-2); vertical-align: middle; }
+
+/* ---- LP nav ---- */
+.lp-nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) 0;
+}
+.lp-nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.lp-logo {
+  display: flex; align-items: baseline; gap: var(--space-2);
+  text-decoration: none; color: var(--navy-700);
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 1.3rem; letter-spacing: -0.02em;
+}
+.lp-logo b { font-weight: 700; }
+.lp-logo span { color: var(--color-text-muted); font-weight: 400; font-size: 0.95rem; font-style: italic; }
+.lp-nav-links {
+  display: flex; gap: var(--space-6); align-items: center;
+  font-size: var(--fs-body-sm);
+}
+.lp-nav-links a { text-decoration: none; color: var(--color-text); transition: color var(--dur-fast) var(--ease-out); }
+.lp-nav-links a:hover { color: var(--coral-600); }
+.lp-nav-actions { display: flex; gap: var(--space-2); align-items: center; }
+@media (max-width: 900px) { .lp-nav-links { display: none; } }
+
+/* ---- LP Hero ---- */
+.lp-hero {
+  position: relative;
+  padding: var(--space-20) 0 var(--space-24);
+  overflow: hidden;
+  background: var(--peach-25);
+}
+.lp-hero::before {
+  content: "";
+  position: absolute; top: -10%; right: -10%;
+  width: 60%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--peach-100), transparent 60%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+.lp-hero::after {
+  content: "";
+  position: absolute; bottom: -20%; left: -10%;
+  width: 50%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--mint-50), transparent 60%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+.lp-hero-inner {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+@media (max-width: 900px) { .lp-hero-inner { grid-template-columns: 1fr; gap: var(--space-10); } }
+
+.lp-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--coral-700);
+  margin-bottom: var(--space-6);
+}
+.lp-hero-eyebrow::before {
+  content: ""; width: 32px; height: 1px; background: var(--coral-500);
+}
+.lp-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-3xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--navy-800);
+  margin: 0 0 var(--space-6);
+}
+.lp-hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral-500);
+}
+.lp-hero-sub {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-snug);
+  color: var(--ink-700);
+  max-width: 50ch;
+  margin: 0 0 var(--space-8);
+}
+.lp-hero-cta { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-10); }
+.lp-hero-meta {
+  display: flex; align-items: center; gap: var(--space-4);
+  font-size: var(--fs-body-sm); color: var(--color-text-muted);
+}
+.lp-hero-meta .avatar-stack { flex-shrink: 0; }
+
+/* Hero visual collage */
+.lp-hero-visual {
+  position: relative;
+  aspect-ratio: 1/1.05;
+}
+.hv-card {
+  position: absolute;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-5);
+}
+.hv-photo {
+  position: absolute;
+  inset: 18% 8% 18% 18%;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--navy-600), var(--navy-800));
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+.hv-photo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,255,255,0.12), transparent 60%),
+    repeating-linear-gradient(135deg, transparent 0 6px, rgba(255,255,255,0.04) 6px 7px);
+}
+/* SVG audience illustration is injected in body */
+.hv-event {
+  top: 6%; right: 0%;
+  width: 58%;
+}
+.hv-event .lab { 
+  font-family: var(--font-mono); 
+  font-size: 0.65rem; 
+  letter-spacing: 0.08em; 
+  text-transform: uppercase; 
+  color: var(--coral-600);
+  margin-bottom: var(--space-2);
+}
+.hv-event .ev-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+.hv-event .ev-meta { font-size: var(--fs-body-sm); color: var(--color-text-muted); margin-top: var(--space-1); }
+
+.hv-stat {
+  bottom: 4%; left: -2%;
+  width: 48%;
+  background: var(--navy-800);
+  color: #fff;
+  border-color: rgba(255,255,255,0.12);
+}
+.hv-stat .val {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+}
+.hv-stat .val em { font-style: italic; color: var(--coral-400); }
+.hv-stat .lab {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-top: var(--space-2);
+}
+
+.hv-tag {
+  position: absolute;
+  top: 38%; left: -4%;
+  background: var(--coral-500);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-body-sm);
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  transform: rotate(-4deg);
+}
+
+/* ---- Persona Section ---- */
+.lp-persona {
+  padding: var(--space-20) 0;
+  background: var(--color-bg);
+}
+.lp-persona-head {
+  display: flex; justify-content: space-between; align-items: end;
+  margin-bottom: var(--space-10);
+  gap: var(--space-6); flex-wrap: wrap;
+}
+.lp-section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--coral-600);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+.lp-section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+  color: var(--navy-800);
+  margin: 0;
+  max-width: 18ch;
+}
+.lp-section-title em { font-style: italic; color: var(--coral-500); font-weight: 400; }
+.lp-section-sub {
+  font-size: var(--fs-body-lg);
+  color: var(--ink-700);
+  max-width: 45ch;
+  line-height: var(--lh-snug);
+}
+.lp-persona-aside { max-width: 320px; }
+.lp-persona-aside a {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  color: var(--navy-700); text-decoration: none;
+  font-size: var(--fs-body-sm); font-weight: 500;
+  border-bottom: 1px solid var(--navy-700);
+  padding-bottom: 2px;
+}
+
+/* ---- Stats Section ---- */
+.lp-stats {
+  padding: var(--space-20) 0;
+  background: var(--cream-25);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---- Resources ---- */
+.lp-resources { padding: var(--space-20) 0; }
+
+/* ---- Show / podcast ---- */
+.lp-show { padding: var(--space-16) 0 var(--space-20); }
+
+/* ---- Members directory teaser ---- */
+.lp-people { padding: var(--space-20) 0; background: var(--mint-25); }
+.people-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5);
+}
+@media (max-width: 900px) { .people-grid { grid-template-columns: repeat(2, 1fr); } }
+.person-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-align: left;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.person-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.person-photo {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+}
+.person-photo::before { content: ""; position: absolute; inset: 0; }
+.person-card[data-tone="a"] .person-photo::before { background: linear-gradient(135deg, var(--peach-100), var(--coral-400)); }
+.person-card[data-tone="b"] .person-photo::before { background: linear-gradient(135deg, var(--mint-50), #6FA98A); }
+.person-card[data-tone="c"] .person-photo::before { background: linear-gradient(135deg, var(--sky-50), var(--navy-400)); }
+.person-card[data-tone="d"] .person-photo::before { background: linear-gradient(135deg, var(--cream-50), #BFA46F); }
+.person-photo::after {
+  content: ""; position: absolute;
+  left: 50%; bottom: 0; transform: translateX(-50%);
+  width: 65%; height: 75%;
+  background: rgba(14,14,12,0.55);
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+}
+.person-body {
+  padding: var(--space-4);
+  display: flex; flex-direction: column; gap: var(--space-1);
+}
+.person-name { font-weight: 600; font-size: var(--fs-body); }
+.person-role { font-size: var(--fs-body-sm); color: var(--color-text-muted); line-height: var(--lh-snug); }
+.person-tag {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--coral-700);
+}
+
+/* ---- Testimonial section ---- */
+.lp-testimonial { padding: var(--space-16) 0; }
+
+/* ---- Framework section ---- */
+.lp-framework { padding: var(--space-20) 0; }
+
+/* ---- Newsletter / final CTA ---- */
+.lp-cta {
+  padding: var(--space-24) 0;
+  background: var(--navy-800);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.lp-cta::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 90% 50%, rgba(235,84,68,0.3), transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 100%, rgba(63,85,152,0.6), transparent 60%);
+  pointer-events: none;
+}
+.lp-cta-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; text-align: center; }
+.lp-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display-2xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  margin: 0 0 var(--space-5);
+}
+.lp-cta h2 em { font-style: italic; color: var(--coral-300); }
+.lp-cta p {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-snug);
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 var(--space-8);
+}
+.lp-cta-form {
+  display: flex; gap: var(--space-2);
+  max-width: 480px; margin: 0 auto;
+}
+.lp-cta-form input {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  padding: 0.875rem 1.125rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius-pill);
+  color: #fff;
+}
+.lp-cta-form input::placeholder { color: rgba(255,255,255,0.5); }
+.lp-cta-form input:focus { outline: none; border-color: var(--coral-400); }
+
+/* ---- Footer ---- */
+.lp-footer {
+  background: var(--ink-900);
+  color: rgba(255,255,255,0.7);
+  padding: var(--space-16) 0 var(--space-8);
+  font-size: var(--fs-body-sm);
+}
+.lp-footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+@media (max-width: 900px) {
+  .lp-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+.lp-footer-brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: var(--space-3);
+}
+.lp-footer-brand span { font-style: italic; color: var(--coral-400); font-weight: 400; }
+.lp-footer h5 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin: 0 0 var(--space-4);
+  font-weight: 500;
+}
+.lp-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.lp-footer ul a { color: rgba(255,255,255,0.78); text-decoration: none; }
+.lp-footer ul a:hover { color: var(--coral-300); }
+.lp-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: var(--space-6);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);
+  font-size: var(--fs-body-sm);
+  color: rgba(255,255,255,0.5);
+}
+
+/* =========================================================
+   ANIMATION ENTRANCE
+   ========================================================= */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 700ms var(--ease-out) both; }
+.rise-1 { animation-delay: 80ms; }
+.rise-2 { animation-delay: 160ms; }
+.rise-3 { animation-delay: 240ms; }
+.rise-4 { animation-delay: 320ms; }
+.rise-5 { animation-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     DOC NAV
+     ========================================================= -->
+<nav class="docnav">
+  <div class="docnav-inner">
+    <div class="docnav-brand">B2BEA <span>/ design review</span></div>
+    <div class="docnav-links">
+      <a href="#audit">Audit</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#primitives">Primitives</a>
+      <a href="#components">Components</a>
+      <a href="#landing">Landing</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =========================================================
+     DOC HERO
+     ========================================================= -->
+<header class="doc-hero">
+  <div class="shell doc-hero-inner">
+    <div class="doc-hero-eyebrow rise rise-1">B2B eCommerce Association · Design Review v1</div>
+    <h1 class="rise rise-2">From <em>industry association</em><br>to professional network.</h1>
+    <p class="doc-hero-sub rise rise-3">
+      A UX audit of the current site, a foundational design system with tokens and composite components,
+      and a new landing page concept — all built around the positioning the client actually wants:
+      a place where B2B eCommerce practitioners come to get smarter, connect, and move faster.
+    </p>
+    <div class="doc-hero-toc rise rise-4">
+      <a href="#audit"><span class="doc-hero-toc-num">01</span><span class="doc-hero-toc-label">UX Audit</span></a>
+      <a href="#tokens"><span class="doc-hero-toc-num">02</span><span class="doc-hero-toc-label">Design Tokens</span></a>
+      <a href="#primitives"><span class="doc-hero-toc-num">03</span><span class="doc-hero-toc-label">Primitives</span></a>
+      <a href="#components"><span class="doc-hero-toc-num">04</span><span class="doc-hero-toc-label">Components</span></a>
+      <a href="#landing"><span class="doc-hero-toc-num">05</span><span class="doc-hero-toc-label">Landing Page</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     01 · AUDIT
+     ========================================================= -->
+<section class="section" id="audit">
+  <div class="shell">
+    <div class="section-meta">
+      <div class="section-num">01 / Audit</div>
+      <div>
+        <h2 class="section-title">What's <em>actually</em> broken about the current site.</h2>
+        <p class="section-lede">
+          The existing site works as an association brochure. It does not work as the front door to a professional
+          network. Below are the structural problems — not pixel critiques — that block the positioning the team wants.
+        </p>
+      </div>
+    </div>
+
+    <!-- Positioning gap callout -->
+    <div class="audit-positioning">
+      <div class="col">
+        <span class="label">The site reads as</span>
+        <h3>An <em>industry association</em> with classes, badges, and a vendor wall.</h3>
+        <p>
+          Hero promises "Advancing the future of B2B eCommerce" — boardroom-vague. The first three CTAs (Join Now,
+          Learn More, Join Today) compete for attention without segmenting the visitor. The page rewards no one quickly:
+          executives, practitioners, and vendors all see the same wall.
+        </p>
+      </div>
+      <div class="col">
+        <span class="label">It needs to read as</span>
+        <h3>A <em>professional network</em> built for the people doing the work.</h3>
+        <p>
+          PMA — the reference — leads with social proof ("300k+ community members"), segments by career level in the
+          first scroll, and uses editorial voice to feel like a publication, not a portal. The job is the same here:
+          show the visitor who's inside, prove the network has gravity, and route them to their lane fast.
+        </p>
+      </div>
+    </div>
+
+    <div class="audit-grid">
+
+      <div class="audit-item severity-high">
+        <div class="audit-item-tag">Severity · High · Hero</div>
+        <h4>The hero says nothing memorable.</h4>
+        <p>
+          "Advancing the Future of B2B eCommerce Through Education and Connection" is the kind of sentence every
+          association in the world could put on its homepage. It's worth zero search intent and zero recall.
+        </p>
+        <span class="fix">→ Lead with a specific, opinionated value claim — who it's for and what they get. Stat trio in-hero.</span>
+      </div>
+
+      <div class="audit-item severity-high">
+        <div class="audit-item-tag">Severity · High · Routing</div>
+        <h4>No segmentation in the first scroll.</h4>
+        <p>
+          A manufacturer, a software vendor, and a consultant all need different things from this site, and the homepage
+          treats them identically. The reference does this in the first viewport with a "tell us who you are" card grid.
+        </p>
+        <span class="fix">→ Persona selector with 5 lanes (Manufacturer · Distributor · Software · Agency · Consultant) right under the hero.</span>
+      </div>
+
+      <div class="audit-item severity-high">
+        <div class="audit-item-tag">Severity · High · CTA conflict</div>
+        <h4>Three "Join" CTAs in the first 600 pixels.</h4>
+        <p>
+          "Join Now" (top nav), "Join Now" (hero), and "Learn More" (certificate block) compete before the visitor knows
+          why they'd join. Add the orange ticket bar at the very top and there are four orange clickables stacked.
+        </p>
+        <span class="fix">→ One primary action per viewport. Top-of-page bar should be a soft signal, not a CTA.</span>
+      </div>
+
+      <div class="audit-item severity-med">
+        <div class="audit-item-tag">Severity · Medium · Voice</div>
+        <h4>Generic, association-tone copy throughout.</h4>
+        <p>
+          "Discover & Make Connections in B2B eCommerce," "Find a B2B ecommerce expert," "Become a Member Today" — every
+          headline could belong to any trade body. No point of view, no italic, no character.
+        </p>
+        <span class="fix">→ Editorial voice with display serif + italic accents on the differentiator words.</span>
+      </div>
+
+      <div class="audit-item severity-med">
+        <div class="audit-item-tag">Severity · Medium · Visual rhythm</div>
+        <h4>One palette, many sections, no contrast.</h4>
+        <p>
+          Navy → white → navy → white → navy. The page has eight major bands and uses essentially two background colors.
+          Compare to PMA's pastel rotation (peach, mint, cream, navy) that signals each section is a different room.
+        </p>
+        <span class="fix">→ Add warm tonal surfaces (peach, cream, mint) as section separators. Reserve navy for emphasis.</span>
+      </div>
+
+      <div class="audit-item severity-med">
+        <div class="audit-item-tag">Severity · Medium · Cards</div>
+        <h4>News cards look identical and earn no attention.</h4>
+        <p>
+          The "Latest News & Insights" grid uses the same card shell with cropped photos for every item. There's no
+          format differentiation (guide vs. report vs. interview) and no signal of why a given piece matters.
+        </p>
+        <span class="fix">→ Card variants by format. Tonal media areas. Author attribution prominent. Estimated read time.</span>
+      </div>
+
+      <div class="audit-item severity-med">
+        <div class="audit-item-tag">Severity · Medium · Vendor wall</div>
+        <h4>The vendor wall is the longest section on the page.</h4>
+        <p>
+          Roughly 40+ vendor logos in a flat grid sit between membership CTAs. For a site positioned as a practitioner
+          network, this much vendor real estate signals the inverse — vendors first, practitioners second.
+        </p>
+        <span class="fix">→ Compress to a 6-logo trust strip. Move the full vendor directory to its own "Exchange" page.</span>
+      </div>
+
+      <div class="audit-item severity-med">
+        <div class="audit-item-tag">Severity · Medium · Social proof</div>
+        <h4>No people on the page who feel like members.</h4>
+        <p>
+          One YouTube thumbnail of a man with a microphone. One audience photo, taken from behind. No member faces, no
+          quotes, no titles. A "LinkedIn for B2B eCommerce" should put member identities in the first two scrolls.
+        </p>
+        <span class="fix">→ Practitioner spotlight + member directory teaser with at least 4 named profiles above the fold-2.</span>
+      </div>
+
+      <div class="audit-item severity-low">
+        <div class="audit-item-tag">Severity · Low · IA</div>
+        <h4>Top nav has too many parallel categories.</h4>
+        <p>
+          Membership, Academy, Events, Resources, News & Insights, About — six parallel menus, several of which overlap
+          ("Resources" vs "News & Insights"). The mental model is shallow and wide, not deep and clear.
+        </p>
+        <span class="fix">→ Collapse to 4 primary: Insights · Events · Careers · Academy. Membership lives in the CTA.</span>
+      </div>
+
+      <div class="audit-item severity-low">
+        <div class="audit-item-tag">Severity · Low · Typography</div>
+        <h4>One sans-serif for everything.</h4>
+        <p>
+          Display, headings, body, captions — all the same family at different weights. No editorial contrast, which
+          flattens the page and removes a major lever for brand voice.
+        </p>
+        <span class="fix">→ Pair a characterful display serif (Fraunces) with a clean UI sans (General Sans).</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     02 · TOKENS
+     ========================================================= -->
+<section class="section" id="tokens">
+  <div class="shell">
+    <div class="section-meta">
+      <div class="section-num">02 / Tokens</div>
+      <div>
+        <h2 class="section-title">Foundations: the <em>system</em> beneath the system.</h2>
+        <p class="section-lede">
+          The client board ships four flat hex values. A working system needs tonal ramps, semantic tokens that map
+          meaning to color, a real type ramp, and scales for spacing, radius, and elevation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Color ramps -->
+    <div class="token-block">
+      <h3>Color · Navy ramp</h3>
+      <div class="ramp-label"><span>navy-50</span><span>navy-900</span></div>
+      <div class="ramp">
+        <div class="ramp-step dark" style="background: var(--navy-50)">50</div>
+        <div class="ramp-step dark" style="background: var(--navy-100)">100</div>
+        <div class="ramp-step dark" style="background: var(--navy-200)">200</div>
+        <div class="ramp-step" style="background: var(--navy-300)">300</div>
+        <div class="ramp-step" style="background: var(--navy-400)">400</div>
+        <div class="ramp-step" style="background: var(--navy-500)">500</div>
+        <div class="ramp-step" style="background: var(--navy-600)">600</div>
+        <div class="ramp-step" style="background: var(--navy-700)">700★</div>
+        <div class="ramp-step" style="background: var(--navy-800)">800</div>
+        <div class="ramp-step" style="background: var(--navy-900)">900</div>
+      </div>
+
+      <h3 style="margin-top: var(--space-8);">Color · Coral ramp</h3>
+      <div class="ramp-label"><span>coral-50</span><span>coral-900</span></div>
+      <div class="ramp">
+        <div class="ramp-step dark" style="background: var(--coral-50)">50</div>
+        <div class="ramp-step dark" style="background: var(--coral-100)">100</div>
+        <div class="ramp-step dark" style="background: var(--coral-200)">200</div>
+        <div class="ramp-step" style="background: var(--coral-300)">300</div>
+        <div class="ramp-step" style="background: var(--coral-400)">400</div>
+        <div class="ramp-step" style="background: var(--coral-500)">500★</div>
+        <div class="ramp-step" style="background: var(--coral-600)">600</div>
+        <div class="ramp-step" style="background: var(--coral-700)">700</div>
+        <div class="ramp-step" style="background: var(--coral-800)">800</div>
+        <div class="ramp-step" style="background: var(--coral-900)">900</div>
+      </div>
+
+      <h3 style="margin-top: var(--space-8);">Color · Editorial surface tints</h3>
+      <p style="font-size: var(--fs-body-sm); color: var(--color-text-muted); max-width: 60ch; margin: 0 0 var(--space-4);">
+        The warmth the current site is missing. Used as section backgrounds to give the page rhythm.
+      </p>
+      <div class="ramp">
+        <div class="ramp-step dark" style="background: var(--peach-25)">peach-25</div>
+        <div class="ramp-step dark" style="background: var(--peach-50)">peach-50</div>
+        <div class="ramp-step dark" style="background: var(--peach-100)">peach-100</div>
+        <div class="ramp-step dark" style="background: var(--cream-25)">cream-25</div>
+        <div class="ramp-step dark" style="background: var(--cream-50)">cream-50</div>
+        <div class="ramp-step dark" style="background: var(--mint-25)">mint-25</div>
+        <div class="ramp-step dark" style="background: var(--mint-50)">mint-50</div>
+        <div class="ramp-step dark" style="background: var(--sky-25)">sky-25</div>
+        <div class="ramp-step dark" style="background: var(--sky-50)">sky-50</div>
+        <div class="ramp-step" style="background: var(--ink-50)">ink-50</div>
+      </div>
+    </div>
+
+    <!-- Semantic tokens -->
+    <div class="token-block">
+      <h3>Semantic mapping</h3>
+      <p style="font-size: var(--fs-body-sm); color: var(--color-text-muted); max-width: 60ch; margin: 0 0 var(--space-5);">
+        Every component references these names, not raw hex. Re-skinning the brand means changing this layer only.
+      </p>
+      <div class="semantic-grid">
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-brand)"></div><div>color-brand<br><code>navy-700</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-accent)"></div><div>color-accent<br><code>coral-500</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-surface)"></div><div>color-surface<br><code>#FFFFFF</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-surface-subtle)"></div><div>surface-subtle<br><code>peach-25</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-surface-warm)"></div><div>surface-warm<br><code>cream-25</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-surface-mint)"></div><div>surface-mint<br><code>mint-25</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-text)"></div><div>color-text<br><code>ink-800</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-text-muted)"></div><div>text-muted<br><code>ink-500</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-success)"></div><div>success<br><code>#1F7A3A</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-warning)"></div><div>warning<br><code>#B36800</code></div></div>
+        <div class="sem-chip"><div class="sem-swatch" style="background: var(--color-danger)"></div><div>danger<br><code>#B0271E</code></div></div>
+      </div>
+    </div>
+
+    <!-- Type ramp -->
+    <div class="token-block">
+      <h3>Type · Fraunces (display) + General Sans (UI)</h3>
+      <p style="font-size: var(--fs-body-sm); color: var(--color-text-muted); max-width: 60ch; margin: 0 0 var(--space-5);">
+        Fraunces brings the editorial italic the brand needs. General Sans handles dense UI with character but without
+        Inter's ubiquity. Use italic Fraunces only for emphasis words, never whole sentences.
+      </p>
+      <div class="type-row">
+        <span class="role">display-2xl</span>
+        <span class="specimen t-display-2xl">Move <em style="font-style:italic; color:var(--coral-500)">faster</em>.</span>
+        <span class="spec">Fraunces 500 · clamp(2.6–4.8rem)</span>
+      </div>
+      <div class="type-row">
+        <span class="role">display-xl</span>
+        <span class="specimen t-display-xl">Build the network.</span>
+        <span class="spec">Fraunces 500 · clamp(2.2–3.6rem)</span>
+      </div>
+      <div class="type-row">
+        <span class="role">display-lg</span>
+        <span class="specimen t-display-lg">Pick your track.</span>
+        <span class="spec">Fraunces 500 · clamp(1.8–2.6rem)</span>
+      </div>
+      <div class="type-row">
+        <span class="role">heading-lg</span>
+        <span class="specimen t-heading-lg">Founder, Acme Distributors</span>
+        <span class="spec">General Sans 600 · 1.5rem</span>
+      </div>
+      <div class="type-row">
+        <span class="role">heading</span>
+        <span class="specimen t-heading">Career Acceleration Kit</span>
+        <span class="spec">General Sans 600 · 1.25rem</span>
+      </div>
+      <div class="type-row">
+        <span class="role">body-lg</span>
+        <span class="specimen t-body-lg">The professional network for people doing B2B digital commerce.</span>
+        <span class="spec">General Sans 400 · 1.0625rem</span>
+      </div>
+      <div class="type-row">
+        <span class="role">body</span>
+        <span class="specimen t-body">Strategy decks, trend reports, and checklists from practitioners for practitioners.</span>
+        <span class="spec">General Sans 400 · 0.9375rem</span>
+      </div>
+      <div class="type-row">
+        <span class="role">eyebrow</span>
+        <span class="specimen t-eyebrow">Practitioner Spotlight</span>
+        <span class="spec">JetBrains Mono · 0.6875rem · tracked</span>
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="token-block" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10);">
+      <div>
+        <h3>Spacing scale (4px base)</h3>
+        <div class="space-row"><span class="space-label">--space-1</span><div class="space-bar" style="width: 4px"></div><span class="space-px">4px</span></div>
+        <div class="space-row"><span class="space-label">--space-2</span><div class="space-bar" style="width: 8px"></div><span class="space-px">8px</span></div>
+        <div class="space-row"><span class="space-label">--space-3</span><div class="space-bar" style="width: 12px"></div><span class="space-px">12px</span></div>
+        <div class="space-row"><span class="space-label">--space-4</span><div class="space-bar" style="width: 16px"></div><span class="space-px">16px</span></div>
+        <div class="space-row"><span class="space-label">--space-6</span><div class="space-bar" style="width: 24px"></div><span class="space-px">24px</span></div>
+        <div class="space-row"><span class="space-label">--space-8</span><div class="space-bar" style="width: 32px"></div><span class="space-px">32px</span></div>
+        <div class="space-row"><span class="space-label">--space-12</span><div class="space-bar" style="width: 48px"></div><span class="space-px">48px</span></div>
+        <div class="space-row"><span class="space-label">--space-16</span><div class="space-bar" style="width: 64px"></div><span class="space-px">64px</span></div>
+        <div class="space-row"><span class="space-label">--space-24</span><div class="space-bar" style="width: 96px"></div><span class="space-px">96px</span></div>
+      </div>
+
+      <div>
+        <h3>Radius scale</h3>
+        <div class="radius-row" style="margin-bottom: var(--space-8)">
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-xs)"></div><span class="radius-name">xs · 4</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-sm)"></div><span class="radius-name">sm · 6</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-md)"></div><span class="radius-name">md · 10</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-lg)"></div><span class="radius-name">lg · 16</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-xl)"></div><span class="radius-name">xl · 24</span></div>
+          <div class="radius-item"><div class="radius-box" style="border-radius: var(--radius-pill)"></div><span class="radius-name">pill</span></div>
+        </div>
+
+        <h3>Elevation</h3>
+        <div class="shadow-row">
+          <div class="shadow-item"><div class="shadow-box" style="box-shadow: var(--shadow-xs)"></div><span class="shadow-name">xs</span></div>
+          <div class="shadow-item"><div class="shadow-box" style="box-shadow: var(--shadow-sm)"></div><span class="shadow-name">sm</span></div>
+          <div class="shadow-item"><div class="shadow-box" style="box-shadow: var(--shadow-md)"></div><span class="shadow-name">md</span></div>
+          <div class="shadow-item"><div class="shadow-box" style="box-shadow: var(--shadow-lg)"></div><span class="shadow-name">lg</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     03 · PRIMITIVES
+     ========================================================= -->
+<section class="section" id="primitives">
+  <div class="shell">
+    <div class="section-meta">
+      <div class="section-num">03 / Primitives</div>
+      <div>
+        <h2 class="section-title">The <em>atoms</em>. Every page is built from these.</h2>
+        <p class="section-lede">
+          Buttons, fields, chips, badges, and avatars — all wired to the semantic tokens above so a single change at
+          the token level cascades through every screen.
+        </p>
+      </div>
+    </div>
+
+    <div class="demo-grid">
+
+      <div class="demo-card">
+        <div class="demo-card-label">Button · Primary</div>
+        <div class="demo-row">
+          <button class="btn btn-primary">Join the community</button>
+        </div>
+        <div class="demo-row">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+        <div class="demo-row">
+          <button class="btn btn-primary" disabled>Disabled</button>
+          <button class="btn btn-primary">With <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-label">Button · Accent &amp; Outline</div>
+        <div class="demo-row">
+          <button class="btn btn-accent">Become a member</button>
+          <button class="btn btn-outline">Explore resources</button>
+        </div>
+        <div class="demo-row">
+          <button class="btn btn-ghost">Ghost</button>
+          <a href="#" class="btn-link">Inline link</a>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-label">Fields</div>
+        <div class="field">
+          <label class="field-label" for="d-email">Email</label>
+          <input type="email" id="d-email" placeholder="you@company.com" />
+        </div>
+        <div class="field">
+          <label class="field-label" for="d-role">Role</label>
+          <select id="d-role">
+            <option>Select your track…</option>
+            <option>Manufacturer</option>
+            <option>Distributor</option>
+          </select>
+        </div>
+        <div class="field error">
+          <label class="field-label">Country</label>
+          <input type="text" value="" placeholder="Required" />
+          <span class="field-help">This field is required.</span>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-label">Chips · selectable</div>
+        <div class="demo-row">
+          <button class="chip is-active">All</button>
+          <button class="chip">Strategy</button>
+          <button class="chip">Operations</button>
+          <button class="chip">Tech &amp; data</button>
+        </div>
+        <div class="demo-card-label" style="margin-top: var(--space-5);">Chips · outline / accent</div>
+        <div class="demo-row">
+          <button class="chip chip-outline">Filter</button>
+          <button class="chip chip-accent">Featured</button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-label">Badges</div>
+        <div class="demo-row">
+          <span class="badge">Guide</span>
+          <span class="badge badge-accent">Trend Deck</span>
+          <span class="badge badge-success">Live</span>
+          <span class="badge badge-warning">Draft</span>
+          <span class="badge badge-danger">Closing</span>
+          <span class="badge badge-dark">New</span>
+          <span class="badge badge-outline">Free</span>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-label">Avatars</div>
+        <div class="demo-row">
+          <span class="avatar avatar-sm">SJ</span>
+          <span class="avatar">SJ</span>
+          <span class="avatar avatar-lg">SJ</span>
+        </div>
+        <div class="demo-card-label" style="margin-top: var(--space-5);">Avatar stack</div>
+        <div class="demo-row">
+          <div class="avatar-stack">
+            <span class="avatar" style="background: var(--coral-100); color: var(--coral-700);">JK</span>
+            <span class="avatar" style="background: var(--mint-50); color: #1F6E45;">SJ</span>
+            <span class="avatar" style="background: var(--cream-50); color: #7A5A1F;">NH</span>
+            <span class="avatar" style="background: var(--sky-50); color: var(--navy-700);">+9</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     04 · COMPOSITE COMPONENTS
+     ========================================================= -->
+<section class="section" id="components">
+  <div class="shell">
+    <div class="section-meta">
+      <div class="section-num">04 / Components</div>
+      <div>
+        <h2 class="section-title">The <em>molecules</em>. Where the brand voice lives.</h2>
+        <p class="section-lede">
+          Persona selectors, resource cards, event cards, testimonials, stat blocks, podcast rows, and a content
+          framework. These are the components that, used together, make the network feel inhabited.
+        </p>
+      </div>
+    </div>
+
+    <!-- Persona Selector -->
+    <div style="margin-bottom: var(--space-16);">
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Persona selector · used in hero-adjacent routing</div>
+      <div class="persona-grid">
+        <a class="persona-card" data-tone="navy" href="#">
+          <span class="persona-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg>
+          </span>
+          <span class="persona-title">Manufacturer</span>
+          <span class="persona-desc">Sell direct, grow digital channels.</span>
+        </a>
+        <a class="persona-card" data-tone="coral" href="#">
+          <span class="persona-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="1"/><path d="M3 10h18M8 7V5h8v2"/></svg>
+          </span>
+          <span class="persona-title">Distributor</span>
+          <span class="persona-desc">Modernize how you serve your customers.</span>
+        </a>
+        <a class="persona-card" data-tone="mint" href="#">
+          <span class="persona-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/></svg>
+          </span>
+          <span class="persona-title">Software</span>
+          <span class="persona-desc">Reach buyers who need what you build.</span>
+        </a>
+        <a class="persona-card" data-tone="cream" href="#">
+          <span class="persona-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+          </span>
+          <span class="persona-title">Agency</span>
+          <span class="persona-desc">Connect with clients who need your edge.</span>
+        </a>
+        <a class="persona-card" data-tone="ink" href="#">
+          <span class="persona-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 17l-6.5 4 2-7.5L2 9h7z"/></svg>
+          </span>
+          <span class="persona-title">Consultant</span>
+          <span class="persona-desc">Build your reputation. Land better work.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Resource Cards -->
+    <div style="margin-bottom: var(--space-16);">
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Resource cards · three tonal variants by format</div>
+      <div class="resource-grid">
+        <article class="res-card" data-tone="navy">
+          <div class="res-card-media">
+            <span class="badge badge-accent label">Guide</span>
+            <div class="res-card-media-title">Career<br>Acceleration<br>Kit</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">Six free, white-label assets for B2B eCommerce directors and VPs.</h4>
+            <p class="res-card-desc">Move from execution to strategy with templates the community has stress-tested in production.</p>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--peach-50); color: var(--coral-700)">JK</span>
+              <span><span class="author">Justin King</span> · Founder, B2BEA</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="res-card" data-tone="coral">
+          <div class="res-card-media">
+            <span class="badge label">Trend Deck</span>
+            <div class="res-card-media-title">2026<br>B2B Commerce<br>Trends</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">The shifts shaping B2B this year, built for leadership decks.</h4>
+            <p class="res-card-desc">Source-checked findings from 200+ practitioners, ready to drop into your Q1 board update.</p>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--mint-50); color: #1F6E45">SJ</span>
+              <span><span class="author">Shannon Jonza</span> · Editorial Lead</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="res-card" data-tone="mint">
+          <div class="res-card-media">
+            <span class="badge badge-dark label">Topic</span>
+            <div class="res-card-media-title">Redefining<br>B2B Digital<br>Transformation</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">Frameworks for building a profitable digital branch.</h4>
+            <p class="res-card-desc">Leadership models, maturity stages, and organizational alignment — practical, not theoretical.</p>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--cream-50); color: #7A5A1F">NH</span>
+              <span><span class="author">Nichole Hess</span> · Master Data Strategist</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Event card + Testimonial -->
+    <div class="event-test-grid">
+      <article class="event-card">
+        <div class="event-date">
+          <div class="month">June</div>
+          <div class="day">15</div>
+          <div class="year">2026</div>
+        </div>
+        <div class="event-body">
+          <span class="t-eyebrow">In-person · Flagship</span>
+          <h4 class="event-title">B2B eCommerce World 2026</h4>
+          <p class="event-location">📍 Indianapolis, IN · 500+ attendees expected</p>
+          <div class="event-cta">
+            <a href="#" class="btn btn-accent btn-sm">Get tickets →</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="testimonial">
+        <div>
+          <span class="t-eyebrow" style="color: var(--coral-700)">Practitioner Spotlight</span>
+          <p class="testimonial-quote" style="margin-top: var(--space-3);">
+            "B2BEA is the only place where practitioners can actually <em>talk shop</em>. No vendor pitches.
+            No surface-level takes. Just people who've done it."
+          </p>
+          <div class="testimonial-attr">
+            <span class="avatar avatar-lg" style="background: var(--navy-100); color: var(--navy-700);">SJ</span>
+            <div>
+              <div class="testimonial-attr-name">Steven Javor</div>
+              <div class="testimonial-attr-role">B2B Digital Commerce Strategist</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-photo"></div>
+      </div>
+    </div>
+
+    <!-- Stat block + Podcast row -->
+    <div style="margin-bottom: var(--space-16);">
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Stat block</div>
+      <div class="stat-row" style="padding: var(--space-8) var(--space-8); background: var(--peach-25); border-radius: var(--radius-xl); border: 1px solid var(--color-border);">
+        <div class="stat">
+          <div class="stat-value">500<em>+</em></div>
+          <div class="stat-label">Active members</div>
+          <div class="stat-desc">Across 40+ countries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">42</div>
+          <div class="stat-label">Events / year</div>
+          <div class="stat-desc">Online &amp; in-person</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">200<em>+</em></div>
+          <div class="stat-label">Resources</div>
+          <div class="stat-desc">Guides · reports · templates</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">96<em>%</em></div>
+          <div class="stat-label">Renew rate</div>
+          <div class="stat-desc">2024 cohort</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: var(--space-16);">
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Podcast / show row</div>
+      <div class="pod-row">
+        <div class="pod-cover">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2z"/></svg>
+        </div>
+        <div class="pod-content">
+          <div class="pod-eyebrow">The B2B eCommerce Show</div>
+          <h4 class="pod-title">Conversations with practitioners. Not vendor pitches.</h4>
+          <p class="pod-desc">Justin King interviews the leaders who've actually done the hard work.</p>
+        </div>
+        <div class="pod-actions">
+          <a href="#" class="pod-btn">▸ Apple Podcasts</a>
+          <a href="#" class="pod-btn">▸ Spotify</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo wall -->
+    <div style="margin-bottom: var(--space-16);">
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Logo wall · trust strip variant (replaces 40-logo wall)</div>
+      <div class="logo-wall-strip">
+        <div class="logo-wall-lede">Practitioners from</div>
+        <div class="logo-wall">
+          <div class="logo-wall-item">Motion</div>
+          <div class="logo-wall-item">Bapcor</div>
+          <div class="logo-wall-item">3M</div>
+          <div class="logo-wall-item">FletcherBuilding</div>
+          <div class="logo-wall-item">Workwear</div>
+          <div class="logo-wall-item">Metagenics</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content framework -->
+    <div>
+      <div class="demo-card-label" style="margin-bottom: var(--space-5);">Content framework · proprietary visual asset (the "memorable thing")</div>
+      <div class="framework">
+        <div class="framework-header">
+          <h3 class="framework-title">The B2B <em>Commerce</em> Core Framework</h3>
+          <div class="framework-key">
+            <span class="kdot k-strategy">Strategy</span>
+            <span class="kdot k-research">Research</span>
+            <span class="kdot k-content">Operations</span>
+            <span class="kdot k-launch">Launch</span>
+          </div>
+        </div>
+        <div class="framework-grid" id="frameworkGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     05 · LANDING PAGE
+     ========================================================= -->
+<div class="lp-flag"><span class="dot"></span>Landing page concept · composed entirely from the system above</div>
+<section id="landing" class="lp">
+
+  <!-- LP NAV -->
+  <nav class="lp-nav">
+    <div class="shell lp-nav-inner">
+      <a href="#" class="lp-logo"><b>B2B</b><span>eCommerce Association</span></a>
+      <div class="lp-nav-links">
+        <a href="#">Insights</a>
+        <a href="#">Events</a>
+        <a href="#">Academy</a>
+        <a href="#">Careers</a>
+        <a href="#">Directory</a>
+      </div>
+      <div class="lp-nav-actions">
+        <a href="#" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="#" class="btn btn-accent btn-sm">Join</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LP HERO -->
+  <header class="lp-hero">
+    <div class="shell lp-hero-inner">
+      <div>
+        <div class="lp-hero-eyebrow">B2B eCommerce Association · est. 2018</div>
+        <h1>Where B2B eCommerce practitioners come to <em>get smarter, connect, and move faster.</em></h1>
+        <p class="lp-hero-sub">
+          The professional network built by and for the people doing B2B digital commerce —
+          distributors, manufacturers, agencies, and the software teams that serve them.
+        </p>
+        <div class="lp-hero-cta">
+          <a href="#" class="btn btn-primary btn-lg">Join the community →</a>
+          <a href="#" class="btn btn-outline btn-lg">Explore resources</a>
+        </div>
+        <div class="lp-hero-meta">
+          <div class="avatar-stack">
+            <span class="avatar avatar-sm" style="background: var(--coral-100); color: var(--coral-700);">JK</span>
+            <span class="avatar avatar-sm" style="background: var(--mint-50); color: #1F6E45;">SJ</span>
+            <span class="avatar avatar-sm" style="background: var(--cream-50); color: #7A5A1F;">NH</span>
+            <span class="avatar avatar-sm" style="background: var(--sky-50); color: var(--navy-700);">+497</span>
+          </div>
+          <span>500+ practitioners across 40+ countries.</span>
+        </div>
+      </div>
+
+      <!-- Hero collage -->
+      <div class="lp-hero-visual">
+        <div class="hv-photo">
+          <!-- SVG audience -->
+          <svg viewBox="0 0 400 420" style="position: absolute; inset: 0; width: 100%; height: 100%;" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="stage" cx="50%" cy="20%" r="50%">
+                <stop offset="0%" stop-color="rgba(235,84,68,0.4)"/>
+                <stop offset="100%" stop-color="rgba(235,84,68,0)"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="420" fill="url(#stage)"/>
+            <!-- Stage / podium -->
+            <rect x="140" y="140" width="120" height="60" rx="4" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="200" cy="155" r="6" fill="rgba(235,84,68,0.7)"/>
+            <!-- Audience silhouettes -->
+            <g fill="rgba(0,0,0,0.55)">
+              <ellipse cx="60" cy="380" rx="34" ry="20"/><circle cx="60" cy="345" r="14"/>
+              <ellipse cx="130" cy="390" rx="36" ry="22"/><circle cx="130" cy="350" r="15"/>
+              <ellipse cx="200" cy="380" rx="38" ry="22"/><circle cx="200" cy="338" r="16"/>
+              <ellipse cx="270" cy="390" rx="36" ry="22"/><circle cx="270" cy="350" r="15"/>
+              <ellipse cx="340" cy="380" rx="34" ry="20"/><circle cx="340" cy="345" r="14"/>
+              <ellipse cx="95" cy="320" rx="28" ry="16"/><circle cx="95" cy="295" r="11"/>
+              <ellipse cx="165" cy="325" rx="30" ry="17"/><circle cx="165" cy="298" r="12"/>
+              <ellipse cx="235" cy="325" rx="30" ry="17"/><circle cx="235" cy="298" r="12"/>
+              <ellipse cx="305" cy="320" rx="28" ry="16"/><circle cx="305" cy="295" r="11"/>
+              <ellipse cx="200" cy="280" rx="24" ry="14"/><circle cx="200" cy="258" r="10"/>
+              <ellipse cx="140" cy="285" rx="22" ry="13"/><circle cx="140" cy="265" r="9"/>
+              <ellipse cx="260" cy="285" rx="22" ry="13"/><circle cx="260" cy="265" r="9"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hv-card hv-event">
+          <div class="lab">Next event</div>
+          <div class="ev-title">B2B eCommerce World 2026</div>
+          <div class="ev-meta">Indianapolis · June 15–16</div>
+        </div>
+
+        <div class="hv-card hv-stat">
+          <div class="val">500<em>+</em></div>
+          <div class="lab">Active members</div>
+        </div>
+
+        <div class="hv-tag">No vendor pitches.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PERSONA -->
+  <section class="lp-persona">
+    <div class="shell">
+      <div class="lp-persona-head">
+        <div>
+          <span class="lp-section-eyebrow">Pick your track</span>
+          <h2 class="lp-section-title">You're in the right place. <em>Tell us who you are.</em></h2>
+        </div>
+        <div class="lp-persona-aside">
+          <p class="lp-section-sub" style="margin-bottom: var(--space-3);">We'll show you the people, resources, and community most relevant to your world.</p>
+          <a href="#">Not sure? Browse everything →</a>
+        </div>
+      </div>
+
+      <div class="persona-grid">
+        <a class="persona-card" data-tone="navy" href="#">
+          <span class="persona-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg></span>
+          <span class="persona-title">Manufacturer</span>
+          <span class="persona-desc">Sell direct, grow digital channels.</span>
+        </a>
+        <a class="persona-card" data-tone="coral" href="#">
+          <span class="persona-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="1"/><path d="M3 10h18M8 7V5h8v2"/></svg></span>
+          <span class="persona-title">Distributor</span>
+          <span class="persona-desc">Modernize how you serve customers.</span>
+        </a>
+        <a class="persona-card" data-tone="mint" href="#">
+          <span class="persona-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/></svg></span>
+          <span class="persona-title">Software</span>
+          <span class="persona-desc">Reach buyers who need what you build.</span>
+        </a>
+        <a class="persona-card" data-tone="cream" href="#">
+          <span class="persona-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8M4.6 9a1.7 1.7 0 0 0-.3-1.8"/></svg></span>
+          <span class="persona-title">Agency</span>
+          <span class="persona-desc">Connect with clients who need your edge.</span>
+        </a>
+        <a class="persona-card" data-tone="ink" href="#">
+          <span class="persona-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 17l-6.5 4 2-7.5L2 9h7z"/></svg></span>
+          <span class="persona-title">Consultant</span>
+          <span class="persona-desc">Build your reputation. Land better work.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="lp-stats">
+    <div class="shell">
+      <div class="lp-persona-head">
+        <div>
+          <span class="lp-section-eyebrow">The network</span>
+          <h2 class="lp-section-title">A community with <em>gravity</em>.</h2>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value">500<em>+</em></div>
+          <div class="stat-label">Active members</div>
+          <div class="stat-desc">Across 40+ countries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">42</div>
+          <div class="stat-label">Events / year</div>
+          <div class="stat-desc">Online &amp; in-person</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">200<em>+</em></div>
+          <div class="stat-label">Resources published</div>
+          <div class="stat-desc">Guides · reports · templates</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">96<em>%</em></div>
+          <div class="stat-label">Renewal rate</div>
+          <div class="stat-desc">2024 cohort</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="lp-resources">
+    <div class="shell">
+      <div class="lp-persona-head">
+        <div>
+          <span class="lp-section-eyebrow">Resources</span>
+          <h2 class="lp-section-title">Shortcuts built for people with <em>real work</em> to do.</h2>
+        </div>
+        <div class="lp-persona-aside">
+          <p class="lp-section-sub" style="margin-bottom: var(--space-3);">Strategy decks, trend reports, and checklists made by practitioners, for practitioners.</p>
+          <a href="#">View all resources →</a>
+        </div>
+      </div>
+
+      <div class="resource-grid">
+        <article class="res-card" data-tone="navy">
+          <div class="res-card-media">
+            <span class="badge badge-accent label">Guide</span>
+            <div class="res-card-media-title">Career<br>Acceleration<br>Kit</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">Six white-label assets for directors and VPs ready to move from execution to strategy.</h4>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--peach-50); color: var(--coral-700)">JK</span>
+              <span><span class="author">Justin King</span> · 12 min read</span>
+            </div>
+          </div>
+        </article>
+        <article class="res-card" data-tone="coral">
+          <div class="res-card-media">
+            <span class="badge label">Trend Deck</span>
+            <div class="res-card-media-title">2026<br>B2B Commerce<br>Trends</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">The shifts shaping B2B this year. Built for leadership decks.</h4>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--mint-50); color: #1F6E45">SJ</span>
+              <span><span class="author">Shannon Jonza</span> · 18 min read</span>
+            </div>
+          </div>
+        </article>
+        <article class="res-card" data-tone="mint">
+          <div class="res-card-media">
+            <span class="badge badge-dark label">Topic</span>
+            <div class="res-card-media-title">Redefining<br>B2B Digital<br>Transformation</div>
+          </div>
+          <div class="res-card-body">
+            <h4 class="res-card-title">Leadership models, maturity stages, and organizational alignment.</h4>
+            <div class="res-card-meta">
+              <span class="avatar avatar-sm" style="background: var(--cream-50); color: #7A5A1F">NH</span>
+              <span><span class="author">Nichole Hess</span> · 24 min read</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST -->
+  <section class="lp-show">
+    <div class="shell">
+      <div class="pod-row">
+        <div class="pod-cover">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2z"/></svg>
+        </div>
+        <div class="pod-content">
+          <div class="pod-eyebrow">The B2B eCommerce Show</div>
+          <h4 class="pod-title">The show for people doing B2B digital commerce.</h4>
+          <p class="pod-desc">Real conversations with practitioners — not vendor pitches.</p>
+        </div>
+        <div class="pod-actions">
+          <a href="#" class="pod-btn">▸ Apple Podcasts</a>
+          <a href="#" class="pod-btn">▸ Spotify</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section class="lp-people">
+    <div class="shell">
+      <div class="lp-persona-head">
+        <div>
+          <span class="lp-section-eyebrow">The community</span>
+          <h2 class="lp-section-title">People to <em>know</em>.</h2>
+        </div>
+        <div class="lp-persona-aside">
+          <p class="lp-section-sub" style="margin-bottom: var(--space-3);">The practitioners leading B2B digital commerce. Connect with the people who've done the work.</p>
+          <a href="#">Browse directory →</a>
+        </div>
+      </div>
+
+      <div class="people-grid">
+        <article class="person-card" data-tone="a">
+          <div class="person-photo"></div>
+          <div class="person-body">
+            <span class="person-tag">Distributor</span>
+            <span class="person-name">Shannon Jonza</span>
+            <span class="person-role">VP Digital Commerce · MillerKnoll</span>
+          </div>
+        </article>
+        <article class="person-card" data-tone="b">
+          <div class="person-photo"></div>
+          <div class="person-body">
+            <span class="person-tag">Manufacturer</span>
+            <span class="person-name">Nichole Hess</span>
+            <span class="person-role">Master Data Strategist · S31</span>
+          </div>
+        </article>
+        <article class="person-card" data-tone="c">
+          <div class="person-photo"></div>
+          <div class="person-body">
+            <span class="person-tag">Strategist</span>
+            <span class="person-name">Steven Javor</span>
+            <span class="person-role">B2B Digital Commerce Strategist</span>
+          </div>
+        </article>
+        <article class="person-card" data-tone="d">
+          <div class="person-photo"></div>
+          <div class="person-body">
+            <span class="person-tag">Founder</span>
+            <span class="person-name">Justin King</span>
+            <span class="person-role">Founder · B2BEA</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="lp-testimonial">
+    <div class="shell">
+      <div class="testimonial">
+        <div>
+          <span class="t-eyebrow" style="color: var(--coral-700)">Practitioner Spotlight</span>
+          <p class="testimonial-quote" style="margin-top: var(--space-3);">
+            "B2BEA is the only place where B2B eCommerce practitioners can actually <em>talk shop</em>.
+            No vendor pitches, no surface-level takes. Just people who've done it."
+          </p>
+          <div class="testimonial-attr">
+            <span class="avatar avatar-lg" style="background: var(--navy-100); color: var(--navy-700);">SJ</span>
+            <div>
+              <div class="testimonial-attr-name">Steven Javor</div>
+              <div class="testimonial-attr-role">B2B Digital Commerce Strategist</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-photo"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORK -->
+  <section class="lp-framework">
+    <div class="shell">
+      <div class="framework">
+        <div class="framework-header">
+          <h3 class="framework-title">The B2B <em>Commerce</em> Core Framework</h3>
+          <div class="framework-key">
+            <span class="kdot k-strategy">Strategy</span>
+            <span class="kdot k-research">Research</span>
+            <span class="kdot k-content">Operations</span>
+            <span class="kdot k-launch">Launch</span>
+          </div>
+        </div>
+        <div class="framework-grid" id="frameworkGrid2"></div>
+        <p style="position: relative; z-index: 1; margin-top: var(--space-8); max-width: 60ch; color: rgba(255,255,255,0.7); font-size: var(--fs-body);">
+          The elements every B2B digital commerce team should be operating fluently. Built from 200+ practitioner
+          interviews. Hover any cell to see the underlying playbook.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO STRIP -->
+  <section style="padding: var(--space-12) 0;">
+    <div class="shell">
+      <div class="logo-wall-strip">
+        <div class="logo-wall-lede">Practitioners from</div>
+        <div class="logo-wall">
+          <div class="logo-wall-item">Motion</div>
+          <div class="logo-wall-item">Bapcor</div>
+          <div class="logo-wall-item">3M</div>
+          <div class="logo-wall-item">FletcherBuilding</div>
+          <div class="logo-wall-item">Workwear</div>
+          <div class="logo-wall-item">Metagenics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="lp-cta">
+    <div class="shell lp-cta-inner">
+      <h2>Ready to go <em>deeper</em>?</h2>
+      <p>Access the full resource library, private community, events, and the people who can help you move faster. Practitioners only. No vendor pitches.</p>
+      <form class="lp-cta-form" onsubmit="return false;">
+        <input type="email" placeholder="you@company.com" />
+        <button class="btn btn-accent btn-lg">Join B2BEA</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div class="shell">
+      <div class="lp-footer-grid">
+        <div>
+          <div class="lp-footer-brand">B2B<span>EA</span></div>
+          <p style="max-width: 32ch; line-height: var(--lh-snug);">Helping mid-market B2B distributors and manufacturers win at digital commerce through education, community, and expert insights.</p>
+        </div>
+        <div>
+          <h5>Network</h5>
+          <ul><li><a href="#">Membership</a></li><li><a href="#">Directory</a></li><li><a href="#">Events</a></li><li><a href="#">Community</a></li></ul>
+        </div>
+        <div>
+          <h5>Insights</h5>
+          <ul><li><a href="#">Articles</a></li><li><a href="#">Reports</a></li><li><a href="#">Trend decks</a></li><li><a href="#">Podcast</a></li></ul>
+        </div>
+        <div>
+          <h5>Academy</h5>
+          <ul><li><a href="#">Courses</a></li><li><a href="#">Certifications</a></li><li><a href="#">Workshops</a></li></ul>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="lp-footer-bottom">
+        <div>© 2026 B2B eCommerce Association. All rights reserved.</div>
+        <div>Made for practitioners, not vendors.</div>
+      </div>
+    </div>
+  </footer>
+
+</section>
+
+<script>
+// Build the periodic-table-style framework. 48 cells, themed by category.
+(function () {
+  const cells = [
+    { sym: "Ps", num: "01", cat: "strategy", name: "Positioning" },
+    { sym: "Vm", num: "02", cat: "strategy", name: "Value model" },
+    { sym: "Gtm", num: "03", cat: "strategy", name: "GTM motion" },
+    { sym: "Bd", num: "04", cat: "strategy", name: "Buyer definition" },
+    { sym: "Ch", num: "05", cat: "strategy", name: "Channel mix" },
+    { sym: "Pr", num: "06", cat: "research", name: "Pricing intel" },
+    { sym: "Ca", num: "07", cat: "research", name: "Comp analysis" },
+    { sym: "Mt", num: "08", cat: "research", name: "Market sizing" },
+    { sym: "Vc", num: "09", cat: "research", name: "Voice of customer" },
+    { sym: "Js", num: "10", cat: "research", name: "Job stories" },
+    { sym: "Po", num: "11", cat: "content",  name: "PIM ops" },
+    { sym: "Cx", num: "12", cat: "content",  name: "Catalog UX" },
+    { sym: "Sx", num: "13", cat: "content",  name: "Search/PDP" },
+    { sym: "Ck", num: "14", cat: "content",  name: "Checkout" },
+    { sym: "Fr", num: "15", cat: "content",  name: "Fulfillment" },
+    { sym: "Re", num: "16", cat: "content",  name: "Returns" },
+    { sym: "Ac", num: "17", cat: "content",  name: "Account mgmt" },
+    { sym: "Qt", num: "18", cat: "content",  name: "Quote-to-cash" },
+    { sym: "An", num: "19", cat: "content",  name: "Analytics" },
+    { sym: "Da", num: "20", cat: "content",  name: "Data arch" },
+    { sym: "Sy", num: "21", cat: "content",  name: "Sync (ERP↔)" },
+    { sym: "Lc", num: "22", cat: "content",  name: "Lifecycle" },
+    { sym: "Em", num: "23", cat: "content",  name: "Email ops" },
+    { sym: "Lo", num: "24", cat: "launch",   name: "Launch plan" },
+    { sym: "Pl", num: "25", cat: "launch",   name: "Pilot cohort" },
+    { sym: "Mg", num: "26", cat: "launch",   name: "Migration" },
+    { sym: "En", num: "27", cat: "launch",   name: "Enablement" },
+    { sym: "Cs", num: "28", cat: "launch",   name: "Change mgmt" },
+    { sym: "Kp", num: "29", cat: "launch",   name: "KPIs" },
+    { sym: "It", num: "30", cat: "launch",   name: "Iteration" },
+    { sym: "Tg", num: "31", cat: "launch",   name: "Tagging" },
+    { sym: "Fb", num: "32", cat: "launch",   name: "Feedback loop" },
+    { sym: "Sr", num: "33", cat: "launch",   name: "Stakeholder rpt" },
+    { sym: "Br", num: "34", cat: "strategy", name: "Brand ladder" },
+    { sym: "Ms", num: "35", cat: "strategy", name: "Messaging" },
+    { sym: "Pe", num: "36", cat: "strategy", name: "Personas" }
+  ];
+
+  function fill(targetId) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    target.innerHTML = "";
+    cells.forEach(c => {
+      const el = document.createElement("div");
+      el.className = "f-cell c-" + c.cat;
+      el.title = c.name;
+      el.innerHTML = `<span class="num">${c.num}</span><span class="sym">${c.sym}</span>`;
+      target.appendChild(el);
+    });
+  }
+  fill("frameworkGrid");
+  fill("frameworkGrid2");
+})();
+</script>
+
+</body>
+</html>
