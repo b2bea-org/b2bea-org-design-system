@@ -1,4 +1,11 @@
 <!doctype html>
+<!--
+  b2bea:exception=home_hero — the design board previews the marketing-scale hero
+  clamp in its typography reference. The audit permits the clamp only in files
+  that declare this marker.
+  b2bea:audit=skip — designer-review reference; previews two hero sizes (2 h1s
+  is intentional) and reference markup, not a contract page.
+-->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -6,24 +13,58 @@
   <title>B2BEA Design Review Board</title>
   <link rel="stylesheet" href="../b2bea.css">
   <style>
-    body { background: #f5f5f5; }
-    .board-section { margin-bottom: 2rem; }
-    .board-title { color: var(--b2bea-color-primary); font-size: 1.25rem; margin: 0 0 1rem; }
+    body { background: var(--b2bea-color-surface); }
+    .board-section { margin-bottom: 2.5rem; }
+    .board-title {
+      color: var(--b2bea-color-primary);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0 0 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .board-sub { color: var(--b2bea-color-muted); font-size: 0.875rem; margin: 0 0 1rem; }
     .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
     .swatch { overflow: hidden; }
-    .swatch__color { height: 84px; }
-    .swatch__meta { padding: 0.875rem; font-size: 0.875rem; }
+    .swatch__color { height: 64px; }
+    .swatch__meta { padding: 0.75rem; font-size: 0.8125rem; }
+    .swatch__meta strong { display: block; color: var(--b2bea-color-primary); font-size: 0.875rem; }
+    .swatch__meta code { font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted); }
     .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-    .component-card { padding: 1.25rem; }
+    .component-card { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .component-card h3 { margin: 0; font-size: 0.875rem; font-weight: 800; color: var(--b2bea-color-primary); text-transform: uppercase; letter-spacing: 0; }
     .stack { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    .stack--col { flex-direction: column; align-items: stretch; }
     .form-grid { display: grid; gap: 0.75rem; }
     .table-demo { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-    .table-demo th, .table-demo td { border-bottom: 1px solid var(--b2bea-color-border); padding: 0.75rem; text-align: left; }
-    .table-demo th { color: var(--b2bea-color-primary); font-weight: 800; }
+    .table-demo th, .table-demo td { border-bottom: 1px solid var(--b2bea-color-border); padding: 0.625rem 0.5rem; text-align: left; }
+    .table-demo th { color: var(--b2bea-color-primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .table-demo tbody tr:hover { background: var(--b2bea-color-surface); }
     .mini-page { overflow: hidden; padding: 0; }
-    .mini-page__hero { background: var(--b2bea-color-primary); color: white; padding: 1.5rem; }
-    .mini-page__hero h3 { margin: 0; font-size: 1.5rem; }
-    .mini-page__body { padding: 1.25rem; }
+    .mini-page__hero { background: var(--b2bea-color-primary); color: white; padding: 1.25rem; }
+    .mini-page__hero h4 { margin: 0; font-size: 1.125rem; color: inherit; }
+    .mini-page__body { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .board-fullbleed { grid-column: 1 / -1; }
+    .type-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px dashed var(--b2bea-color-border); }
+    .type-row:last-child { border-bottom: 0; }
+    .type-row__meta { color: var(--b2bea-color-muted); font-family: var(--b2bea-font-mono); font-size: 0.75rem; }
+    .space-ladder { display: grid; gap: 0.375rem; }
+    .space-ladder__row { display: grid; grid-template-columns: 6rem 1fr 4rem; gap: 0.75rem; align-items: center; font-size: 0.8125rem; }
+    .space-ladder__bar { background: var(--b2bea-color-primary); height: 0.75rem; border-radius: 2px; }
+    .radius-tile { aspect-ratio: 16/9; background: rgba(0, 25, 108, 0.08); display: flex; align-items: center; justify-content: center; color: var(--b2bea-color-primary); font-weight: 800; font-family: var(--b2bea-font-mono); font-size: 0.875rem; }
+    .focus-demo { width: 100%; }
+    .label-caps { color: var(--b2bea-color-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+    .sidebar-mini { background: var(--b2bea-color-background); border: 1px solid var(--b2bea-color-border); border-radius: var(--b2bea-radius); padding: 0.5rem; max-width: 16rem; }
+    .topbar-mini { background: var(--b2bea-color-background); border: 1px solid var(--b2bea-color-border); border-radius: var(--b2bea-radius); padding: 0; overflow: hidden; }
+    .topbar-mini .b2bea-app-topbar { position: static; border-bottom: 0; }
+    .nav-mini { background: var(--b2bea-color-background); border: 1px solid var(--b2bea-color-border); border-radius: var(--b2bea-radius); padding: 0; overflow: hidden; }
+    .nav-mini .b2bea-marketing-nav { border-bottom: 0; }
+    .footer-mini { border-radius: var(--b2bea-radius); overflow: hidden; }
+    .footer-mini .b2bea-footer { padding: 1.5rem; }
+    .logo-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .logo-row__cell { padding: 0.75rem 1rem; border: 1px dashed var(--b2bea-color-border); border-radius: var(--b2bea-radius-sm); background: var(--b2bea-color-background); }
+    .logo-row__cell--navy { background: var(--b2bea-color-primary); }
+    .avatar-stub { width: 3rem; height: 3rem; border-radius: var(--b2bea-radius-pill); background: rgba(0, 25, 108, 0.08); color: var(--b2bea-color-primary); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
   </style>
 </head>
 <body data-register="operational">
@@ -32,99 +73,947 @@
       <div class="b2bea-page-hero__inner">
         <img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/gray-white.png" alt="B2BEA">
         <h1>Design Review Board</h1>
-        <p>Editable visual board for refining the B2BEA.org Lovable design system.</p>
+        <p>Every contracted component, in one place, on the live tokens.</p>
       </div>
     </header>
 
     <section class="b2bea-section">
       <div class="b2bea-container">
+
+        <!-- ============================== FOUNDATIONS ============================== -->
         <section class="board-section">
-          <h2 class="board-title">Color Tokens</h2>
+          <h2 class="board-title">Foundations · Colors</h2>
+          <p class="board-sub">Every token defined in <code>b2bea.design.json</code> → <code>tokens.colors</code>. No other colors are allowed in pages.</p>
           <div class="swatches">
-            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#00196C"></div><div class="swatch__meta"><strong>Primary</strong><br>#00196C</div></article>
-            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#EB5444"></div><div class="swatch__meta"><strong>Accent</strong><br>#EB5444</div></article>
-            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#F5F5F5"></div><div class="swatch__meta"><strong>Surface</strong><br>#F5F5F5</div></article>
-            <article class="b2bea-card swatch"><div class="swatch__color" style="background:#1A1A1A"></div><div class="swatch__meta"><strong>Text</strong><br>#1A1A1A</div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-primary);"></div><div class="swatch__meta"><strong>Primary</strong><code>#00196C</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-primary-hover);"></div><div class="swatch__meta"><strong>Primary Hover</strong><code>#001458</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-accent);"></div><div class="swatch__meta"><strong>Accent</strong><code>#EB5444</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-accent-hover);"></div><div class="swatch__meta"><strong>Accent Hover</strong><code>#d94333</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-background); border-bottom: 1px solid var(--b2bea-color-border);"></div><div class="swatch__meta"><strong>Background</strong><code>#FFFFFF</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-surface);"></div><div class="swatch__meta"><strong>Surface</strong><code>#F5F5F5</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-card); border-bottom: 1px solid var(--b2bea-color-border);"></div><div class="swatch__meta"><strong>Card</strong><code>#FFFFFF</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-border);"></div><div class="swatch__meta"><strong>Border</strong><code>#E0E3EA</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-text);"></div><div class="swatch__meta"><strong>Text</strong><code>#1A1A1A</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-muted);"></div><div class="swatch__meta"><strong>Muted</strong><code>#647085</code></div></article>
+            <article class="b2bea-card swatch"><div class="swatch__color" style="background: var(--b2bea-color-inverse); border-bottom: 1px solid var(--b2bea-color-border);"></div><div class="swatch__meta"><strong>Inverse</strong><code>#FFFFFF</code></div></article>
           </div>
         </section>
 
         <section class="board-section">
-          <h2 class="board-title">Core Components</h2>
+          <h2 class="board-title">Foundations · Typography</h2>
+          <p class="board-sub">Open Sans across display, body, and UI. JetBrains Mono for machine. Marketing-scale clamp is permitted only behind the <code>home_hero</code> exception.</p>
+          <article class="b2bea-card" style="padding: 1.5rem;">
+            <div class="type-row">
+              <span class="type-row__meta">Page title</span>
+              <h1 class="b2bea-title" style="font-size: clamp(2.25rem, 4vw, 3.75rem);">Standard page title scale</h1>
+            </div>
+            <div class="type-row">
+              <span class="type-row__meta">Home hero <small>(exception)</small></span>
+              <h2 class="b2bea-title" style="font-size: clamp(3rem, 7vw, 6rem); line-height: 1.05;">Marketing-scale headline</h2>
+            </div>
+            <div class="type-row">
+              <span class="type-row__meta">Subtitle</span>
+              <p class="b2bea-subtitle" style="margin: 0; color: var(--b2bea-color-muted);">A short useful subtitle for context.</p>
+            </div>
+            <div class="type-row">
+              <span class="type-row__meta">Body prose</span>
+              <p style="margin: 0;">Body copy is set in Open Sans at 16px with line-height 1.65. Letter-spacing is normal — never negative on B2BEA target surfaces.</p>
+            </div>
+            <div class="type-row">
+              <span class="type-row__meta">Label</span>
+              <span class="label-caps">SECTION LABEL</span>
+            </div>
+            <div class="type-row">
+              <span class="type-row__meta">Machine</span>
+              <code style="font-family: var(--b2bea-font-mono); font-size: 0.875rem; color: var(--b2bea-color-muted);">b2bea-page-hero--home // exception=home_hero</code>
+            </div>
+          </article>
+        </section>
+
+        <section class="board-section">
+          <h2 class="board-title">Foundations · Spacing, Radii, Shadows, Focus</h2>
           <div class="component-grid">
             <article class="b2bea-card component-card">
-              <h3>Buttons</h3>
-              <div class="stack">
-                <a class="b2bea-button b2bea-button--primary" href="#">Primary</a>
-                <a class="b2bea-button b2bea-button--accent" href="#">Accent</a>
-                <a class="b2bea-button b2bea-button--outline" href="#">Outline</a>
+              <h3>Spacing tokens</h3>
+              <div class="space-ladder">
+                <div class="space-ladder__row"><code>--space-1</code><div class="space-ladder__bar" style="width: 0.25rem;"></div><span class="type-row__meta">0.25rem</span></div>
+                <div class="space-ladder__row"><code>--space-2</code><div class="space-ladder__bar" style="width: 0.5rem;"></div><span class="type-row__meta">0.5rem</span></div>
+                <div class="space-ladder__row"><code>--space-3</code><div class="space-ladder__bar" style="width: 0.75rem;"></div><span class="type-row__meta">0.75rem</span></div>
+                <div class="space-ladder__row"><code>--space-4</code><div class="space-ladder__bar" style="width: 1rem;"></div><span class="type-row__meta">1rem</span></div>
+                <div class="space-ladder__row"><code>--space-5</code><div class="space-ladder__bar" style="width: 1.25rem;"></div><span class="type-row__meta">1.25rem</span></div>
+                <div class="space-ladder__row"><code>--space-6</code><div class="space-ladder__bar" style="width: 1.5rem;"></div><span class="type-row__meta">1.5rem</span></div>
+                <div class="space-ladder__row"><code>--space-8</code><div class="space-ladder__bar" style="width: 2rem;"></div><span class="type-row__meta">2rem</span></div>
+                <div class="space-ladder__row"><code>--space-12</code><div class="space-ladder__bar" style="width: 3rem;"></div><span class="type-row__meta">3rem</span></div>
+                <div class="space-ladder__row"><code>--space-16</code><div class="space-ladder__bar" style="width: 4rem;"></div><span class="type-row__meta">4rem</span></div>
               </div>
             </article>
 
             <article class="b2bea-card component-card">
-              <h3>Fields</h3>
-              <div class="form-grid">
-                <input class="b2bea-field" type="text" placeholder="Text field">
-                <input class="b2bea-search" type="search" placeholder="Search">
-                <select class="b2bea-select"><option>Select option</option></select>
+              <h3>Radii</h3>
+              <div style="display: grid; gap: 0.75rem;">
+                <div class="radius-tile" style="border-radius: var(--b2bea-radius);">0.75rem</div>
+                <div class="radius-tile" style="border-radius: var(--b2bea-radius-sm);">0.5rem (sm)</div>
+                <div class="radius-tile" style="border-radius: var(--b2bea-radius-pill);">999px (pill)</div>
               </div>
             </article>
 
             <article class="b2bea-card component-card">
-              <h3>Pills + Badges</h3>
+              <h3>Shadows</h3>
+              <div style="background: var(--b2bea-color-card); border-radius: var(--b2bea-radius); padding: 1rem; box-shadow: var(--b2bea-shadow-sm);"><code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem;">--shadow-sm</code></div>
+              <div style="background: var(--b2bea-color-card); border-radius: var(--b2bea-radius); padding: 1rem; box-shadow: var(--b2bea-shadow-md);"><code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem;">--shadow-md</code></div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Focus ring</h3>
+              <p style="margin: 0; color: var(--b2bea-color-muted); font-size: 0.8125rem;">Tab into the field to see the contract focus ring.</p>
+              <input class="b2bea-field focus-demo" type="text" placeholder="Focus me with Tab">
+              <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">0 0 0 3px rgba(0, 25, 108, 0.12)</code>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== ICONS ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Foundations · Icons</h2>
+          <p class="board-sub">Lucide icons (ISC), vendored as a single SVG sprite at <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">icons/lucide/sprite.svg</code>. Color inherits via <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">currentColor</code>; size in em scales with surrounding text. See <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">icons/README.md</code> for the 3-step add-an-icon procedure.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <h3>Starter catalog (12)</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; font-size: 1.5rem; color: var(--b2bea-color-text);">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-search"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">search</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-menu"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">menu</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">x</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-right"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">chevron-right</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-down"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">chevron-down</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-check"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">check</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-alert-triangle"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">alert-triangle</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">info</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-user"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">user</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-users"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">users</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-calendar"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">calendar</code>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-external-link"/></svg>
+                  <code style="font-family: var(--b2bea-font-mono); font-size: 0.75rem; color: var(--b2bea-color-muted);">external-link</code>
+                </div>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Sizes</h3>
+              <p class="board-sub" style="margin-top: 0;">Default <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">1em</code> · <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">--lg</code> 1.5em · <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">--xl</code> 2em.</p>
+              <div style="display: flex; align-items: center; gap: var(--b2bea-space-6); font-size: 1rem; color: var(--b2bea-color-text);">
+                <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-right"/></svg>
+                <svg class="b2bea-icon b2bea-icon--lg" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-right"/></svg>
+                <svg class="b2bea-icon b2bea-icon--xl" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-right"/></svg>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Color (via currentColor)</h3>
+              <p class="board-sub" style="margin-top: 0;">Icon stroke inherits from the parent's <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">color</code>.</p>
+              <div style="display: flex; align-items: center; gap: var(--b2bea-space-5); font-size: 1.5rem;">
+                <span style="color: var(--b2bea-color-text);"><svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg></span>
+                <span style="color: var(--b2bea-color-primary);"><svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg></span>
+                <span style="color: var(--b2bea-color-accent);"><svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg></span>
+                <span style="color: var(--b2bea-color-muted);"><svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg></span>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <h3>Usage patterns</h3>
+              <div class="stack" style="gap: var(--b2bea-space-4);">
+                <div style="display: flex; gap: var(--b2bea-space-3); align-items: center;">
+                  <a class="b2bea-button b2bea-button--primary" href="#" target="_blank" rel="noopener noreferrer">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-user"/></svg>
+                    Become a member
+                  </a>
+                  <span style="color: var(--b2bea-color-muted); font-size: 0.875rem;">Decorative icon paired with visible text — <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-hidden="true"</code> on the SVG.</span>
+                </div>
+                <div style="display: flex; gap: var(--b2bea-space-3); align-items: center;">
+                  <button class="b2bea-button b2bea-button--ghost" type="button" aria-label="Search the directory">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-search"/></svg>
+                  </button>
+                  <span style="color: var(--b2bea-color-muted); font-size: 0.875rem;">Icon-only interactive — <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-label</code> on the parent button (audit-enforced).</span>
+                </div>
+                <div style="display: flex; gap: var(--b2bea-space-3); align-items: center;">
+                  <span style="color: var(--b2bea-color-primary);">
+                    <svg class="b2bea-icon b2bea-icon--lg" role="img" aria-label="Verified vendor"><use href="../icons/lucide/sprite.svg#lucide-check"/></svg>
+                  </span>
+                  <span style="color: var(--b2bea-color-muted); font-size: 0.875rem;">Meaningful icon with no paired text — <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">role="img"</code> + <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-label</code> on the SVG.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== ACTIONS ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Actions · Buttons</h2>
+          <p class="board-sub">Four variants. Same 2.5rem control height as fields. Focus ring matches the contract.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Variants</h3>
               <div class="stack">
-                <span class="b2bea-pill b2bea-pill--active">Active</span>
-                <span class="b2bea-pill">Inactive</span>
+                <a class="b2bea-button b2bea-button--primary" href="#" target="_blank" rel="noopener noreferrer">Primary</a>
+                <a class="b2bea-button b2bea-button--accent" href="#" target="_blank" rel="noopener noreferrer">Accent</a>
+                <a class="b2bea-button b2bea-button--outline" href="#" target="_blank" rel="noopener noreferrer">Outline</a>
+                <a class="b2bea-button b2bea-button--ghost" href="#" target="_blank" rel="noopener noreferrer">Ghost</a>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Disabled</h3>
+              <div class="stack">
+                <button class="b2bea-button b2bea-button--primary" disabled>Primary</button>
+                <button class="b2bea-button b2bea-button--accent" disabled>Accent</button>
+                <button class="b2bea-button b2bea-button--outline" disabled>Outline</button>
+                <button class="b2bea-button b2bea-button--ghost" disabled>Ghost</button>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Loading</h3>
+              <div class="stack">
+                <button class="b2bea-button b2bea-button--primary" aria-busy="true">Saving…</button>
+                <button class="b2bea-button b2bea-button--outline" aria-busy="true">Loading</button>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>With icon</h3>
+              <div class="stack">
+                <a class="b2bea-button b2bea-button--primary" href="#" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">+</span> Invite a colleague</a>
+                <a class="b2bea-button b2bea-button--outline" href="#" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span> Open</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== INPUTS ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Inputs · Fields</h2>
+          <p class="board-sub">All inputs share one radius, one border color, one focus contract.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Text field</h3>
+              <label class="label-caps" for="db-text">Company name</label>
+              <input id="db-text" class="b2bea-field" type="text" placeholder="Hartwell Industrial">
+              <small style="color: var(--b2bea-color-muted); font-size: 0.75rem;">Helper text sits under the field at 12px muted.</small>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Search</h3>
+              <input class="b2bea-search" type="search" placeholder="Search the network">
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Select</h3>
+              <select class="b2bea-select">
+                <option>Manufacturer</option>
+                <option>Distributor</option>
+                <option>Software Provider</option>
+              </select>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Textarea</h3>
+              <textarea class="b2bea-textarea" rows="3" placeholder="Tell people what you work on."></textarea>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Disabled</h3>
+              <input class="b2bea-field" type="text" value="Locked value" disabled>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Error</h3>
+              <label class="label-caps" for="db-err">Email</label>
+              <input id="db-err" class="b2bea-field" type="email" value="not-an-email" aria-invalid="true" aria-describedby="db-err-msg">
+              <small id="db-err-msg" style="color: var(--b2bea-color-accent); font-size: 0.75rem;">Enter a valid work email.</small>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== SIGNALS ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Signals · Pills, Badges, Status, Skeleton</h2>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Filter pills</h3>
+              <div class="stack">
+                <button type="button" class="b2bea-pill b2bea-pill--active">All</button>
+                <button type="button" class="b2bea-pill">Commerce</button>
+                <button type="button" class="b2bea-pill">ERP</button>
+                <button type="button" class="b2bea-pill">PIM</button>
+                <button type="button" class="b2bea-pill" disabled>Coming soon</button>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Badges</h3>
+              <div class="stack">
                 <span class="b2bea-badge">Featured</span>
-                <span class="b2bea-status">Draft</span>
+                <span class="b2bea-badge">Sponsored</span>
+                <span class="b2bea-badge">New</span>
               </div>
             </article>
-
             <article class="b2bea-card component-card">
-              <h3>Table Density</h3>
+              <h3>Status</h3>
+              <div class="stack">
+                <span class="b2bea-status">Draft</span>
+                <span class="b2bea-status">In review</span>
+                <span class="b2bea-status">Published</span>
+                <span class="b2bea-status">Archived</span>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Skeleton</h3>
+              <div class="b2bea-skeleton" style="height: 1rem; width: 80%;"></div>
+              <div class="b2bea-skeleton" style="height: 1rem; width: 55%;"></div>
+              <div class="b2bea-skeleton" style="height: 1rem; width: 65%;"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== SURFACES ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Surfaces · Cards, Panels, Tables, States</h2>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Static card</h3>
+              <p style="margin: 0;">One border, one radius, white background, low blue-tinted shadow.</p>
+            </article>
+            <a class="b2bea-card component-card" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+              <h3>Clickable card</h3>
+              <p style="margin: 0;">Anchors on <code>b2bea-card</code> lift on hover. No layout shift.</p>
+            </a>
+            <article class="b2bea-card component-card" aria-selected="true">
+              <h3>Selected card</h3>
+              <p style="margin: 0;">Primary border + faint tint when chosen. Use <code>aria-selected="true"</code>.</p>
+            </article>
+            <article class="b2bea-card component-card" aria-disabled="true">
+              <h3>Disabled card</h3>
+              <p style="margin: 0;">Muted overall; no misleading hover. Use <code>aria-disabled="true"</code>.</p>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Panel</h3>
+              <div class="b2bea-panel" style="margin: 0;">
+                <p style="margin: 0;">A neutral container for grouped content. Same chrome as a card without the card hover.</p>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Alert · info</h3>
+              <div class="b2bea-alert">
+                <strong>Heads up.</strong>
+                <p style="margin: 0.25rem 0 0; color: var(--b2bea-color-muted); font-size: 0.875rem;">Neutral inline message inside a panel chrome.</p>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Alert · error</h3>
+              <div class="b2bea-alert b2bea-alert--error">
+                <strong>Something failed.</strong>
+                <p style="margin: 0.25rem 0 0.5rem; color: var(--b2bea-color-muted); font-size: 0.875rem;">Coral border, soft coral tint, explanation + retry.</p>
+                <a class="b2bea-button b2bea-button--outline" href="#" target="_blank" rel="noopener noreferrer">Retry</a>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Empty state</h3>
+              <div class="b2bea-empty">
+                <p style="margin: 0; color: var(--b2bea-color-muted); font-size: 0.875rem;">No connections yet. Find people who do the work.</p>
+                <p style="margin-top: 0.75rem;"><a class="b2bea-button b2bea-button--primary" href="#" target="_blank" rel="noopener noreferrer">Find people</a></p>
+              </div>
+            </article>
+            <article class="b2bea-card component-card board-fullbleed">
+              <h3>Table · default with status</h3>
               <table class="table-demo">
-                <thead><tr><th>Name</th><th>Status</th><th>Owner</th></tr></thead>
+                <thead><tr><th>Vendor</th><th>Category</th><th>Status</th><th>Owner</th><th style="text-align: right;">MRR</th></tr></thead>
                 <tbody>
-                  <tr><td>Vendor profile</td><td><span class="b2bea-pill b2bea-pill--active">Live</span></td><td>B2BEA</td></tr>
-                  <tr><td>Survey</td><td><span class="b2bea-pill">Draft</span></td><td>Admin</td></tr>
+                  <tr><td>Northstar Tools</td><td>Manufacturer</td><td><span class="b2bea-pill b2bea-pill--active">Live</span></td><td>B2BEA Editorial</td><td style="text-align: right;">$12.4k</td></tr>
+                  <tr><td>Holman Group</td><td>Distributor</td><td><span class="b2bea-pill">In review</span></td><td>Avery L.</td><td style="text-align: right;">$8.1k</td></tr>
+                  <tr><td>Stack &amp; Pallet</td><td>Agency</td><td><span class="b2bea-status">Draft</span></td><td>Marcus W.</td><td style="text-align: right;">—</td></tr>
+                  <tr><td>Hartwell Industrial</td><td>Manufacturer</td><td><span class="b2bea-pill b2bea-pill--active">Live</span></td><td>Priya S.</td><td style="text-align: right;">$22.0k</td></tr>
                 </tbody>
               </table>
             </article>
           </div>
         </section>
 
+        <!-- ============================== BRAND ============================== -->
         <section class="board-section">
-          <h2 class="board-title">Page Family Miniatures</h2>
+          <h2 class="board-title">Brand · Logos</h2>
+          <p class="board-sub">Official assets only — sourced from this repo or Brett's Cloudflare account (<code>b2bea-guest-packs</code>).</p>
+          <article class="b2bea-card" style="padding: 1.5rem;">
+            <div class="logo-row">
+              <div class="logo-row__cell"><img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/default.png" alt="B2BEA · default"></div>
+              <div class="logo-row__cell"><img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/dark-blue-white.png" alt="B2BEA · dark blue on white"></div>
+              <div class="logo-row__cell logo-row__cell--navy"><img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/gray-white.png" alt="B2BEA · gray-white on navy"></div>
+              <div class="logo-row__cell"><img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/dark-orange-white.png" alt="B2BEA · dark orange on white"></div>
+              <div class="logo-row__cell"><img class="b2bea-logo b2bea-logo--stacked" src="../logos/default/vertical-stacked.png" alt="B2BEA · stacked"></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ============================== MARKETING ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Marketing · Navigation &amp; Hero</h2>
+          <p class="board-sub">Used on the home page. Marketing-scale hero is gated by the <code>home_hero</code> exception marker.</p>
           <div class="component-grid">
-            <article class="b2bea-card mini-page">
-              <div class="mini-page__hero"><h3>Standard Public Page</h3></div>
-              <div class="mini-page__body">
-                <input class="b2bea-search" type="search" placeholder="Search directory">
-                <p><span class="b2bea-pill b2bea-pill--active">All</span> <span class="b2bea-pill">Commerce</span></p>
-              </div>
-            </article>
-
-            <article class="b2bea-card mini-page">
-              <div class="mini-page__body">
-                <span class="b2bea-badge">Operational</span>
-                <h3>Admin / Portal Surface</h3>
-                <p>Compact, clear, and built for repeated work.</p>
-                <a class="b2bea-button b2bea-button--primary" href="#">Review queue</a>
-              </div>
-            </article>
-
-            <article class="b2bea-card mini-page">
-              <div class="mini-page__body">
-                <span class="b2bea-badge">Profile</span>
-                <h3>Vendor Profile</h3>
-                <p>Public vendor profiles are V1. Company profiles are not.</p>
-                <span class="b2bea-status">Published</span>
+            <article class="b2bea-card component-card board-fullbleed">
+              <h3>Marketing nav</h3>
+              <div class="nav-mini">
+                <header class="b2bea-marketing-nav">
+                  <a class="b2bea-marketing-nav__brand" href="#" target="_blank" rel="noopener noreferrer"><img src="../logos/horizontal/default.png" alt="B2BEA"></a>
+                  <nav><ul class="b2bea-marketing-nav__links"><li><a href="#" target="_blank" rel="noopener noreferrer">Network</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Directory</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Academy</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Events</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Jobs</a></li></ul></nav>
+                  <div class="b2bea-marketing-nav__actions">
+                    <a class="b2bea-button b2bea-button--ghost" href="#" target="_blank" rel="noopener noreferrer">Sign in</a>
+                    <a class="b2bea-button b2bea-button--accent" href="#" target="_blank" rel="noopener noreferrer">Become a member</a>
+                  </div>
+                </header>
               </div>
             </article>
           </div>
         </section>
+
+        <section class="board-section">
+          <h2 class="board-title">Marketing · Components</h2>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Stat strip · on white</h3>
+              <div class="b2bea-stat-strip" style="padding: 0;">
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value">12,400+</span><span class="b2bea-stat-strip__label">Members</span></div>
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value">820</span><span class="b2bea-stat-strip__label">Vendors</span></div>
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value">38</span><span class="b2bea-stat-strip__label">Events</span></div>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card" style="background: var(--b2bea-color-primary); color: var(--b2bea-color-inverse); border-color: transparent;">
+              <h3 style="color: var(--b2bea-color-inverse);">Stat strip · on navy</h3>
+              <div class="b2bea-stat-strip" style="padding: 0;">
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value" style="color: var(--b2bea-color-inverse);">12,400+</span><span class="b2bea-stat-strip__label" style="color: rgba(255,255,255,0.7);">Members</span></div>
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value" style="color: var(--b2bea-color-inverse);">820</span><span class="b2bea-stat-strip__label" style="color: rgba(255,255,255,0.7);">Vendors</span></div>
+                <div class="b2bea-stat-strip__item"><span class="b2bea-stat-strip__value" style="color: var(--b2bea-color-inverse);">38</span><span class="b2bea-stat-strip__label" style="color: rgba(255,255,255,0.7);">Events</span></div>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card board-fullbleed">
+              <h3>Persona selector</h3>
+              <div class="b2bea-persona-selector">
+                <a class="b2bea-persona-selector__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-persona-selector__icon">M</span><span class="b2bea-persona-selector__label">Manufacturer</span><span class="b2bea-persona-selector__sublabel">Selling at scale</span></a>
+                <a class="b2bea-persona-selector__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-persona-selector__icon">D</span><span class="b2bea-persona-selector__label">Distributor</span><span class="b2bea-persona-selector__sublabel">Moving product</span></a>
+                <a class="b2bea-persona-selector__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-persona-selector__icon">S</span><span class="b2bea-persona-selector__label">Software</span><span class="b2bea-persona-selector__sublabel">Building the rails</span></a>
+                <a class="b2bea-persona-selector__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-persona-selector__icon">A</span><span class="b2bea-persona-selector__label">Agency</span><span class="b2bea-persona-selector__sublabel">Implementation</span></a>
+                <a class="b2bea-persona-selector__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-persona-selector__icon">C</span><span class="b2bea-persona-selector__label">Consultant</span><span class="b2bea-persona-selector__sublabel">Advisors who ship</span></a>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>People card</h3>
+              <article class="b2bea-people-card" style="padding: 0;">
+                <span class="b2bea-people-card__avatar avatar-stub">AL</span>
+                <div>
+                  <h4 class="b2bea-people-card__name">Avery Lin</h4>
+                  <p class="b2bea-people-card__role">VP Digital · Hartwell Industrial</p>
+                  <p class="b2bea-people-card__tagline">Replatforming an 80-year distributor.</p>
+                </div>
+              </article>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>People card · loading</h3>
+              <article class="b2bea-people-card" style="padding: 0;">
+                <span class="b2bea-skeleton" style="width: 3.5rem; height: 3.5rem; border-radius: var(--b2bea-radius-pill);"></span>
+                <div style="display: grid; gap: 0.4rem;">
+                  <span class="b2bea-skeleton" style="height: 0.875rem; width: 70%;"></span>
+                  <span class="b2bea-skeleton" style="height: 0.75rem; width: 55%;"></span>
+                  <span class="b2bea-skeleton" style="height: 0.75rem; width: 80%;"></span>
+                </div>
+              </article>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Resource card</h3>
+              <article class="b2bea-resource-card" style="padding: 0;">
+                <div class="b2bea-resource-card__media"></div>
+                <span class="b2bea-resource-card__category">Guide</span>
+                <h4 class="b2bea-resource-card__title">Carrier Acceleration Kit</h4>
+                <p class="b2bea-resource-card__excerpt">Field-tested playbook for B2B parcel at distributor scale.</p>
+                <div class="b2bea-resource-card__footer"><span>B2BEA editorial</span><span>12 min</span></div>
+              </article>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Testimonial</h3>
+              <article class="b2bea-testimonial" style="padding: 0;">
+                <blockquote class="b2bea-testimonial__quote" style="font-size: 1.125rem;">"The only place where practitioners actually talk shop."</blockquote>
+                <div class="b2bea-testimonial__attribution">
+                  <span class="b2bea-testimonial__photo">SS</span>
+                  <div>
+                    <div class="b2bea-testimonial__name">Steven Smith</div>
+                    <div class="b2bea-testimonial__role">SVP Digital, Greenline</div>
+                  </div>
+                </div>
+              </article>
+            </article>
+
+
+            <article class="b2bea-card component-card board-fullbleed footer-mini">
+              <h3 style="padding: 1.25rem 1.5rem 0;">Marketing footer</h3>
+              <footer class="b2bea-footer">
+                <div class="b2bea-footer__grid">
+                  <div>
+                    <img class="b2bea-logo b2bea-logo--horizontal" src="../logos/horizontal/gray-white.png" alt="B2BEA">
+                    <p style="margin-top: 0.75rem; color: rgba(255,255,255,0.65); font-size: 0.8125rem;">The professional network for B2B eCommerce.</p>
+                  </div>
+                  <div><div class="b2bea-footer__heading">Members</div><ul class="b2bea-footer__list"><li><a href="#" target="_blank" rel="noopener noreferrer">Network</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Academy</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Benchmarks</a></li></ul></div>
+                  <div><div class="b2bea-footer__heading">Vendors</div><ul class="b2bea-footer__list"><li><a href="#" target="_blank" rel="noopener noreferrer">Directory</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Sponsorship</a></li></ul></div>
+                  <div><div class="b2bea-footer__heading">Company</div><ul class="b2bea-footer__list"><li><a href="#" target="_blank" rel="noopener noreferrer">About</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Privacy</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Terms</a></li></ul></div>
+                </div>
+                <div class="b2bea-footer__legal">&copy; 2026 B2BEA.org</div>
+              </footer>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== OPERATIONAL ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Operational · KPI &amp; Feed</h2>
+          <div class="component-grid">
+            <article class="b2bea-card b2bea-kpi"><span class="b2bea-kpi__label">Connections</span><span class="b2bea-kpi__value">218</span><span class="b2bea-kpi__delta b2bea-kpi__delta--up">12 this month</span></article>
+            <article class="b2bea-card b2bea-kpi"><span class="b2bea-kpi__label">Unread</span><span class="b2bea-kpi__value">5</span><span class="b2bea-kpi__delta b2bea-kpi__delta--down">2 awaiting reply</span></article>
+            <article class="b2bea-card b2bea-kpi"><span class="b2bea-kpi__label">Events</span><span class="b2bea-kpi__value">2</span><span class="b2bea-kpi__delta">Next: 21 May</span></article>
+            <article class="b2bea-card b2bea-kpi"><span class="b2bea-kpi__label">Resources</span><span class="b2bea-skeleton" style="height: 1.875rem; width: 60%;"></span><span class="b2bea-skeleton" style="height: 0.75rem; width: 40%;"></span></article>
+
+            <article class="b2bea-card component-card">
+              <h3>Activity feed · default</h3>
+              <div class="b2bea-activity">
+                <div class="b2bea-activity-row">
+                  <span class="b2bea-activity-row__icon">P</span>
+                  <div class="b2bea-activity-row__body"><span class="b2bea-activity-row__actor">Priya</span> commented on your post.</div>
+                  <span class="b2bea-activity-row__time">2h</span>
+                </div>
+                <div class="b2bea-activity-row">
+                  <span class="b2bea-activity-row__icon">D</span>
+                  <div class="b2bea-activity-row__body"><span class="b2bea-activity-row__actor">Diego</span> accepted your invite.</div>
+                  <span class="b2bea-activity-row__time">6h</span>
+                </div>
+                <div class="b2bea-activity-row">
+                  <span class="b2bea-activity-row__icon">B</span>
+                  <div class="b2bea-activity-row__body"><span class="b2bea-activity-row__actor">B2BEA</span> published Q2 Benchmarks.</div>
+                  <span class="b2bea-activity-row__time">1d</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Activity feed · loading</h3>
+              <div class="b2bea-activity">
+                <div class="b2bea-activity-row">
+                  <span class="b2bea-skeleton" style="width: 2rem; height: 2rem; border-radius: var(--b2bea-radius-pill);"></span>
+                  <div class="b2bea-activity-row__body" style="display: grid; gap: 0.4rem;">
+                    <span class="b2bea-skeleton" style="height: 0.75rem; width: 80%;"></span>
+                    <span class="b2bea-skeleton" style="height: 0.75rem; width: 55%;"></span>
+                  </div>
+                  <span class="b2bea-skeleton" style="width: 2rem; height: 0.75rem;"></span>
+                </div>
+                <div class="b2bea-activity-row">
+                  <span class="b2bea-skeleton" style="width: 2rem; height: 2rem; border-radius: var(--b2bea-radius-pill);"></span>
+                  <div class="b2bea-activity-row__body" style="display: grid; gap: 0.4rem;">
+                    <span class="b2bea-skeleton" style="height: 0.75rem; width: 65%;"></span>
+                    <span class="b2bea-skeleton" style="height: 0.75rem; width: 45%;"></span>
+                  </div>
+                  <span class="b2bea-skeleton" style="width: 2rem; height: 0.75rem;"></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Activity feed · empty</h3>
+              <div class="b2bea-empty">
+                <p style="margin: 0; color: var(--b2bea-color-muted); font-size: 0.875rem;">No activity yet. Connect with a few members to populate your feed.</p>
+                <p style="margin-top: 0.75rem;"><a class="b2bea-button b2bea-button--primary" href="#" target="_blank" rel="noopener noreferrer">Find people</a></p>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Activity feed · error</h3>
+              <div class="b2bea-alert b2bea-alert--error">
+                <strong>Couldn't load activity.</strong>
+                <p style="margin: 0.25rem 0 0.75rem; color: var(--b2bea-color-muted); font-size: 0.875rem;">Try again or contact support if this persists.</p>
+                <a class="b2bea-button b2bea-button--outline" href="#" target="_blank" rel="noopener noreferrer">Retry</a>
+              </div>
+            </article>
+
+            <article class="b2bea-card component-card">
+              <h3>Action list</h3>
+              <div class="b2bea-action-list">
+                <a class="b2bea-action-list__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-action-list__item-icon">✎</span><span>Complete your profile (72%)</span><span class="b2bea-action-list__item-arrow">→</span></a>
+                <a class="b2bea-action-list__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-action-list__item-icon">+</span><span>Invite a colleague</span><span class="b2bea-action-list__item-arrow">→</span></a>
+                <a class="b2bea-action-list__item" href="#" target="_blank" rel="noopener noreferrer"><span class="b2bea-action-list__item-icon">◷</span><span>RSVP for the next event</span><span class="b2bea-action-list__item-arrow">→</span></a>
+                <a class="b2bea-action-list__item" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true"><span class="b2bea-action-list__item-icon">☆</span><span>Saved reading (disabled)</span><span class="b2bea-action-list__item-arrow">→</span></a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== INPUTS · SELECTION ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Inputs · Selection</h2>
+          <p class="board-sub">Checkbox, radio, and toggle. Styled native inputs via <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">appearance: none</code>. Keyboard-accessible by default; arrow-keys cycle radios within a group.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Checkbox</h3>
+              <div class="stack" style="gap: var(--b2bea-space-3);">
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-checkbox"> <span>Default</span></label>
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-checkbox" checked> <span>Checked</span></label>
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-checkbox" disabled> <span style="color: var(--b2bea-color-muted);">Disabled</span></label>
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-checkbox" checked disabled> <span style="color: var(--b2bea-color-muted);">Checked + disabled</span></label>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Radio</h3>
+              <div class="stack" style="gap: var(--b2bea-space-3);">
+                <label class="b2bea-field-row"><input type="radio" name="db-radio" class="b2bea-radio"> <span>Manufacturer</span></label>
+                <label class="b2bea-field-row"><input type="radio" name="db-radio" class="b2bea-radio" checked> <span>Distributor (selected)</span></label>
+                <label class="b2bea-field-row"><input type="radio" name="db-radio" class="b2bea-radio" disabled> <span style="color: var(--b2bea-color-muted);">Vendor (disabled)</span></label>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Toggle</h3>
+              <div class="stack" style="gap: var(--b2bea-space-3);">
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-toggle"> <span>Public profile (off)</span></label>
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-toggle" checked> <span>Email digest (on)</span></label>
+                <label class="b2bea-field-row"><input type="checkbox" class="b2bea-toggle" disabled> <span style="color: var(--b2bea-color-muted);">Beta features (disabled)</span></label>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== INPUTS · DATE TIME RANGE ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Inputs · Date, Time, Range</h2>
+          <p class="board-sub">Native <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;input type="date|time|range"&gt;</code>. Browser provides the picker UI; the visible trigger matches the rest of the form contract. Cross-browser UI varies slightly.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Date</h3>
+              <label class="b2bea-label" for="db-date">Event date</label>
+              <input id="db-date" class="b2bea-field" type="date" value="2026-06-15">
+              <p class="b2bea-help">Native picker on click.</p>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Time</h3>
+              <label class="b2bea-label" for="db-time">Start time</label>
+              <input id="db-time" class="b2bea-field" type="time" value="09:00">
+              <p class="b2bea-help">24-hour or 12-hour per browser locale.</p>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Range slider</h3>
+              <label class="b2bea-label" for="db-range">Budget cap</label>
+              <input id="db-range" class="b2bea-slider" type="range" min="0" max="100" value="40">
+              <p class="b2bea-help">Track in border color; thumb in primary.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== INPUTS · COMPOSITION ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Inputs · Composition</h2>
+          <p class="board-sub">.b2bea-label for form labels, .b2bea-help for muted helper text below a field, .b2bea-field-row for inline label-control alignment, .b2bea-prose for long-form body content.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Form group</h3>
+              <label class="b2bea-label" for="db-company">Company name</label>
+              <input id="db-company" class="b2bea-field" type="text" placeholder="Hartwell Industrial">
+              <p class="b2bea-help">Visible to other practitioners in your profile.</p>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Prose (.b2bea-prose)</h3>
+              <div class="b2bea-prose">
+                <p>The B2BEA practitioner network connects manufacturers, distributors, software vendors, agencies, and consultants who do the work.</p>
+                <h3>What members get</h3>
+                <ul>
+                  <li>Directory access</li>
+                  <li>Member events and benchmarks</li>
+                  <li>The <a href="#" target="_blank" rel="noopener noreferrer">academy library</a></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== DISCLOSURE · ACCORDION ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Disclosure · Accordion</h2>
+          <p class="board-sub">Native <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;details&gt;</code>/<code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;summary&gt;</code> with .b2bea-accordion chrome. Zero JS; keyboard space/enter to toggle. Chevron rotates via the <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">[open]</code> selector.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <details class="b2bea-accordion" open>
+                <summary class="b2bea-accordion__summary">
+                  What's included with practitioner membership?
+                  <svg class="b2bea-icon b2bea-accordion__chevron" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-down"/></svg>
+                </summary>
+                <div class="b2bea-accordion__body">
+                  Directory access, member-only events, benchmarks, the academy library, and direct introductions to other practitioners in your domain.
+                </div>
+              </details>
+              <details class="b2bea-accordion">
+                <summary class="b2bea-accordion__summary">
+                  Can vendors join the directory?
+                  <svg class="b2bea-icon b2bea-accordion__chevron" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-down"/></svg>
+                </summary>
+                <div class="b2bea-accordion__body">
+                  Yes — vendor profiles are reviewed and listed in the directory. Members can reach out directly.
+                </div>
+              </details>
+              <details class="b2bea-accordion">
+                <summary class="b2bea-accordion__summary">
+                  How do you verify practitioners?
+                  <svg class="b2bea-icon b2bea-accordion__chevron" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-down"/></svg>
+                </summary>
+                <div class="b2bea-accordion__body">
+                  Manual review of LinkedIn profile, company affiliation, and role. Average review time is 48 hours.
+                </div>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== NAVIGATION · TABS ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Navigation · Tabs</h2>
+          <p class="board-sub">Pure-CSS radio-input tabs with position-based panel reveal (up to 6 tabs per group). Native keyboard arrow-key cycling. <strong>Documented limit:</strong> doesn't implement the full ARIA tabs pattern (roving tabindex, manual activation); markup is wire-compatible if you add a JS layer later.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <div class="b2bea-tabs">
+                <div class="b2bea-tabs__list" role="tablist" aria-label="Vendor profile sections">
+                  <input type="radio" id="db-tab-1" name="db-tabs" class="b2bea-tabs__radio" checked>
+                  <label for="db-tab-1" class="b2bea-tabs__tab">Overview</label>
+                  <input type="radio" id="db-tab-2" name="db-tabs" class="b2bea-tabs__radio">
+                  <label for="db-tab-2" class="b2bea-tabs__tab">Capabilities</label>
+                  <input type="radio" id="db-tab-3" name="db-tabs" class="b2bea-tabs__radio">
+                  <label for="db-tab-3" class="b2bea-tabs__tab">Reviews</label>
+                </div>
+                <section class="b2bea-tabs__panel">
+                  <p>Vendor overview content — company size, founded date, primary categories.</p>
+                </section>
+                <section class="b2bea-tabs__panel">
+                  <p>Capability matrix — platforms supported, integration types, geographies.</p>
+                </section>
+                <section class="b2bea-tabs__panel">
+                  <p>Member-submitted reviews and ratings.</p>
+                </section>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== NAVIGATION · BREADCRUMB & PAGINATION ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Navigation · Breadcrumb &amp; Pagination</h2>
+          <p class="board-sub">Pure-CSS, no JS. Breadcrumb wraps in <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;nav aria-label="Breadcrumb"&gt;</code>; current page uses <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-current="page"</code>. Pagination wraps in <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;nav aria-label="Pagination"&gt;</code>; unavailable prev/next uses <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-disabled="true"</code>.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <h3>Breadcrumb</h3>
+              <nav aria-label="Breadcrumb">
+                <ol class="b2bea-breadcrumb">
+                  <li class="b2bea-breadcrumb__item"><a href="#" target="_blank" rel="noopener noreferrer">Directory</a></li>
+                  <li class="b2bea-breadcrumb__item"><a href="#" target="_blank" rel="noopener noreferrer">Software</a></li>
+                  <li class="b2bea-breadcrumb__item"><a href="#" target="_blank" rel="noopener noreferrer">eCommerce platforms</a></li>
+                  <li class="b2bea-breadcrumb__item b2bea-breadcrumb__item--current" aria-current="page">Hartwell Commerce Cloud</li>
+                </ol>
+              </nav>
+            </article>
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1;">
+              <h3>Pagination</h3>
+              <nav aria-label="Pagination">
+                <ul class="b2bea-pagination">
+                  <li><a class="b2bea-pagination__item" aria-disabled="true" aria-label="Previous page">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-left"/></svg>
+                  </a></li>
+                  <li><a class="b2bea-pagination__item b2bea-pagination__item--current" href="#" aria-current="page">1</a></li>
+                  <li><a class="b2bea-pagination__item" href="#">2</a></li>
+                  <li><a class="b2bea-pagination__item" href="#">3</a></li>
+                  <li><span class="b2bea-pagination__ellipsis" aria-hidden="true">…</span></li>
+                  <li><a class="b2bea-pagination__item" href="#">12</a></li>
+                  <li><a class="b2bea-pagination__item" href="#" aria-label="Next page">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-chevron-right"/></svg>
+                  </a></li>
+                </ul>
+              </nav>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== FEEDBACK · MODAL ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Feedback · Modal</h2>
+          <p class="board-sub">Native <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;dialog&gt;</code> with .b2bea-modal styling. Close via <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;form method="dialog"&gt;</code> submit. Three open patterns documented: <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;dialog open&gt;</code> attribute, <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;button popovertarget&gt;</code> (Baseline 2024), or <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">dialog.showModal()</code>. Backdrop styled via <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">::backdrop</code>.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1; background: var(--b2bea-color-surface); padding: var(--b2bea-space-6);">
+              <h3>Modal (inline preview, <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">&lt;dialog open&gt;</code>)</h3>
+              <!--
+                Design-board preview only: buttons use type="button" so the
+                modal stays open for visual review. In production, swap to
+                <form method="dialog"> + <button type="submit"> for native
+                close behavior, as documented in component-state-matrix.md.
+              -->
+              <dialog class="b2bea-modal" open style="position: static; margin: var(--b2bea-space-4) auto 0; box-shadow: var(--b2bea-shadow-md);">
+                <form class="b2bea-modal__form" onsubmit="event.preventDefault();">
+                  <header class="b2bea-modal__header">
+                    <h2 class="b2bea-modal__title">Verify your company affiliation</h2>
+                    <button type="button" class="b2bea-button b2bea-button--ghost" aria-label="Close" style="width: 2rem; height: 2rem; padding: 0; min-height: auto;">
+                      <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                    </button>
+                  </header>
+                  <div class="b2bea-modal__body">
+                    <p>We verify practitioners by manual review of your LinkedIn profile and company role. Most reviews complete within 48 hours.</p>
+                    <label class="b2bea-label" for="db-modal-link" style="margin-top: var(--b2bea-space-4);">LinkedIn profile URL</label>
+                    <input id="db-modal-link" class="b2bea-field" type="url" placeholder="https://linkedin.com/in/...">
+                  </div>
+                  <footer class="b2bea-modal__footer">
+                    <button type="button" class="b2bea-button b2bea-button--ghost">Cancel</button>
+                    <button type="button" class="b2bea-button b2bea-button--primary">Submit for review</button>
+                  </footer>
+                </form>
+              </dialog>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== FEEDBACK · TOOLTIP ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Feedback · Tooltip</h2>
+          <p class="board-sub">Pure-CSS hover and focus-within. <strong>Documented limits:</strong> no touch (no hover event); screen-reader announcement requires <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-describedby</code> on the trigger pointing at the bubble's <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">id</code>.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Hover or focus to reveal</h3>
+              <div style="padding: var(--b2bea-space-6) 0; display: flex; gap: var(--b2bea-space-5); justify-content: center;">
+                <span class="b2bea-tooltip">
+                  <button type="button" class="b2bea-button b2bea-button--outline" aria-describedby="db-tip-1">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg>
+                    What's a practitioner?
+                  </button>
+                  <span class="b2bea-tooltip__bubble" id="db-tip-1" role="tooltip">A B2B eCommerce buyer, builder, or operator</span>
+                </span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== FEEDBACK · TOAST ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Feedback · Toast</h2>
+          <p class="board-sub">CSS styling + <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">aria-live="polite"</code> region. Variants: default, success, warning, error. <strong>JS hookup contract (documented, not shipped):</strong> show = append to region; dismiss = remove from DOM; auto-hide = remove after N ms; queue = cap N visible at once.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card" style="grid-column: 1 / -1; background: var(--b2bea-color-surface);">
+              <h3>Static preview (4 variants)</h3>
+              <p class="board-sub" style="margin-top: 0;">In production these sit <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">position: fixed</code> bottom-right; previewed inline here for layout review.</p>
+              <div class="b2bea-toast-region" style="position: static; width: auto; padding-top: var(--b2bea-space-4); flex-direction: column;" aria-live="polite" aria-atomic="true">
+                <div class="b2bea-toast" role="status">
+                  <svg class="b2bea-icon b2bea-icon--lg b2bea-toast__icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-info"/></svg>
+                  <div class="b2bea-toast__body">
+                    <span class="b2bea-toast__title">Heads up</span>
+                    <span class="b2bea-toast__message">Default tone — informational.</span>
+                  </div>
+                  <button type="button" class="b2bea-toast__dismiss" aria-label="Dismiss notification">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                  </button>
+                </div>
+                <div class="b2bea-toast b2bea-toast--success" role="status">
+                  <svg class="b2bea-icon b2bea-icon--lg b2bea-toast__icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-check"/></svg>
+                  <div class="b2bea-toast__body">
+                    <span class="b2bea-toast__title">Saved</span>
+                    <span class="b2bea-toast__message">Your profile changes are live.</span>
+                  </div>
+                  <button type="button" class="b2bea-toast__dismiss" aria-label="Dismiss notification">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                  </button>
+                </div>
+                <div class="b2bea-toast b2bea-toast--warning" role="status">
+                  <svg class="b2bea-icon b2bea-icon--lg b2bea-toast__icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-alert-triangle"/></svg>
+                  <div class="b2bea-toast__body">
+                    <span class="b2bea-toast__title">Almost there</span>
+                    <span class="b2bea-toast__message">Verify your email to publish the profile.</span>
+                  </div>
+                  <button type="button" class="b2bea-toast__dismiss" aria-label="Dismiss notification">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                  </button>
+                </div>
+                <div class="b2bea-toast b2bea-toast--error" role="status">
+                  <svg class="b2bea-icon b2bea-icon--lg b2bea-toast__icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-alert-triangle"/></svg>
+                  <div class="b2bea-toast__body">
+                    <span class="b2bea-toast__title">Couldn't save</span>
+                    <span class="b2bea-toast__message">Connection issue — try again.</span>
+                  </div>
+                  <button type="button" class="b2bea-toast__dismiss" aria-label="Dismiss notification">
+                    <svg class="b2bea-icon" aria-hidden="true"><use href="../icons/lucide/sprite.svg#lucide-x"/></svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== FEEDBACK · SPINNER ============================== -->
+        <section class="board-section">
+          <h2 class="board-title">Feedback · Spinner</h2>
+          <p class="board-sub">Standalone .b2bea-spinner with size variants (default 1em, --lg 1.5em, --xl 2em). Color via <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">currentColor</code>. The legacy <code style="font-family: var(--b2bea-font-mono); font-size: 0.85em;">[aria-busy="true"]</code> button hook is unchanged.</p>
+          <div class="component-grid">
+            <article class="b2bea-card component-card">
+              <h3>Sizes</h3>
+              <div style="display: flex; align-items: center; gap: var(--b2bea-space-5); color: var(--b2bea-color-primary); font-size: 1rem; padding: var(--b2bea-space-4) 0;">
+                <span class="b2bea-spinner" role="status" aria-label="Loading"></span>
+                <span class="b2bea-spinner b2bea-spinner--lg" role="status" aria-label="Loading"></span>
+                <span class="b2bea-spinner b2bea-spinner--xl" role="status" aria-label="Loading"></span>
+              </div>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>Inline with text</h3>
+              <p style="color: var(--b2bea-color-muted);">
+                <span class="b2bea-spinner" role="status" aria-label="Loading" style="color: var(--b2bea-color-primary);"></span>
+                Saving your changes…
+              </p>
+            </article>
+            <article class="b2bea-card component-card">
+              <h3>In button (aria-busy)</h3>
+              <button type="button" class="b2bea-button b2bea-button--primary" aria-busy="true">Saving…</button>
+            </article>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>
+  <script>
+    // Designer-review preview: keep all link/button clicks inert so reviewers
+    // can interact with the board without being navigated away.
+    document.addEventListener("click", function (e) {
+      var target = e.target.closest("a, button");
+      if (target) e.preventDefault();
+    });
+  </script>
 </body>
 </html>
-

@@ -5,7 +5,10 @@
   "type": "module",
   "description": "AI-executable Lovable-era design system for B2BEA.org.",
   "scripts": {
-    "audit": "node checks/audit-b2bea.js ."
+    "audit": "node checks/audit-b2bea.js . && node checks/audit-contrast.mjs . && node checks/audit-a11y.mjs .",
+    "audit:syntax": "node checks/audit-b2bea.js .",
+    "audit:contrast": "node checks/audit-contrast.mjs .",
+    "audit:a11y": "node checks/audit-a11y.mjs ."
   },
   "engines": {
     "node": ">=20"

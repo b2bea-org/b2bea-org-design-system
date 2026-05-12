@@ -26,6 +26,14 @@
         "body": "Open Sans",
         "ui": "Open Sans",
         "machine": "JetBrains Mono"
+      },
+      "heroException": {
+        "name": "home_hero",
+        "marker": "<!-- b2bea:exception=home_hero -->",
+        "useFor": ["home page only"],
+        "allowedClamp": "clamp(3rem, 7vw, 6rem)",
+        "appliesTo": "b2bea-page-hero--home",
+        "rule": "The marketing-scale hero clamp is permitted only in files that declare the marker; the audit fails the build if it appears anywhere else."
       }
     },
     "operational": {
@@ -74,15 +82,18 @@
   "tokens": {
     "colors": {
       "primary": "#00196C",
-      "primaryHover": "#001458",
+      "primaryHover": "#4D6CDB",
       "accent": "#EB5444",
-      "accentHover": "#d94333",
+      "accentHover": "#B0382A",
       "background": "#FFFFFF",
       "surface": "#F5F5F5",
       "card": "#FFFFFF",
       "border": "#E0E3EA",
       "text": "#1A1A1A",
-      "muted": "#647085"
+      "muted": "#647085",
+      "inverse": "#FFFFFF",
+      "success": "#1F7A4D",
+      "warning": "#8A5A00"
     },
     "fontRoles": {
       "display": "--b2bea-font-display",
@@ -108,13 +119,18 @@
       "b2bea-page",
       "b2bea-section",
       "b2bea-page-hero",
+      "b2bea-page-hero--home",
+      "b2bea-marketing-nav",
+      "b2bea-footer",
       "b2bea-toolbar",
-      "b2bea-grid"
+      "b2bea-grid",
+      "b2bea-field-row"
     ],
     "typography": [
       "b2bea-title",
       "b2bea-subtitle",
       "b2bea-label",
+      "b2bea-help",
       "b2bea-prose"
     ],
     "actions": [
@@ -128,25 +144,116 @@
       "b2bea-field",
       "b2bea-search",
       "b2bea-select",
-      "b2bea-textarea"
+      "b2bea-textarea",
+      "b2bea-checkbox",
+      "b2bea-radio",
+      "b2bea-toggle",
+      "b2bea-slider"
+    ],
+    "navigation": [
+      "b2bea-tabs",
+      "b2bea-tabs__list",
+      "b2bea-tabs__radio",
+      "b2bea-tabs__tab",
+      "b2bea-tabs__panel",
+      "b2bea-breadcrumb",
+      "b2bea-breadcrumb__item",
+      "b2bea-breadcrumb__item--current",
+      "b2bea-pagination",
+      "b2bea-pagination__item",
+      "b2bea-pagination__item--current",
+      "b2bea-pagination__item--disabled",
+      "b2bea-pagination__ellipsis"
+    ],
+    "feedback": [
+      "b2bea-modal",
+      "b2bea-modal__form",
+      "b2bea-modal__header",
+      "b2bea-modal__title",
+      "b2bea-modal__body",
+      "b2bea-modal__footer",
+      "b2bea-tooltip",
+      "b2bea-tooltip__bubble",
+      "b2bea-toast-region",
+      "b2bea-toast",
+      "b2bea-toast--success",
+      "b2bea-toast--warning",
+      "b2bea-toast--error",
+      "b2bea-toast__icon",
+      "b2bea-toast__body",
+      "b2bea-toast__title",
+      "b2bea-toast__message",
+      "b2bea-toast__dismiss",
+      "b2bea-spinner",
+      "b2bea-spinner--lg",
+      "b2bea-spinner--xl"
+    ],
+    "disclosure": [
+      "b2bea-accordion",
+      "b2bea-accordion__summary",
+      "b2bea-accordion__chevron",
+      "b2bea-accordion__body"
     ],
     "signals": [
       "b2bea-pill",
       "b2bea-pill--active",
       "b2bea-badge",
-      "b2bea-status"
+      "b2bea-status",
+      "b2bea-skeleton"
     ],
     "surfaces": [
       "b2bea-card",
       "b2bea-panel",
       "b2bea-table",
       "b2bea-empty",
-      "b2bea-alert"
+      "b2bea-alert",
+      "b2bea-alert--error",
+      "b2bea-stat-strip",
+      "b2bea-persona-selector",
+      "b2bea-people-card",
+      "b2bea-testimonial",
+      "b2bea-resource-card"
+    ],
+    "app": [
+      "b2bea-app-shell",
+      "b2bea-app-topbar",
+      "b2bea-app-sidebar",
+      "b2bea-app-content",
+      "b2bea-page-header",
+      "b2bea-kpi",
+      "b2bea-activity-row",
+      "b2bea-action-list"
     ],
     "brand": [
       "b2bea-logo",
       "b2bea-logo--horizontal",
       "b2bea-logo--stacked"
+    ],
+    "icons": [
+      "b2bea-icon",
+      "b2bea-icon--lg",
+      "b2bea-icon--xl"
+    ]
+  },
+  "iconography": {
+    "source": "Lucide (https://lucide.dev)",
+    "license": "ISC",
+    "spritePath": "icons/lucide/sprite.svg",
+    "documentation": "icons/README.md",
+    "available": [
+      "search",
+      "menu",
+      "x",
+      "chevron-left",
+      "chevron-right",
+      "chevron-down",
+      "check",
+      "alert-triangle",
+      "info",
+      "user",
+      "users",
+      "calendar",
+      "external-link"
     ]
   },
   "designerReviewPack": [
@@ -202,7 +309,8 @@
     "cards nested inside cards",
     "unstyled browser default form controls",
     "custom pages without SEO, GEO, social, and analytics metadata",
-    "public practitioner company profile pages in V1"
+    "public practitioner company profile pages in V1",
+    "insufficient contrast between any declared color pair (L1) or between any known component composition (L2)"
   ],
   "qualityBar": [
     "Every in-scope page has a recognizable Lovable header or operational shell.",
@@ -214,14 +322,46 @@
     "Official B2BEA logos are used from this repo or Brett's Cloudflare account only."
   ],
   "audit": {
-    "script": "checks/audit-b2bea.js",
+    "scripts": [
+      "checks/audit-b2bea.js",
+      "checks/audit-contrast.mjs",
+      "checks/audit-a11y.mjs"
+    ],
     "checks": [
-      "b2bea.css is loaded",
-      "one register is declared",
-      "required metadata is present for public pages",
-      "forbidden legacy fonts and oversized headings are reported",
-      "rogue fields/buttons/cards are reported",
-      "logo references use declared assets"
+      "legacy Hanken Grotesk references are reported (audit-b2bea.js)",
+      "negative letter-spacing is reported (audit-b2bea.js)",
+      "marketing-scale hero clamp is allowed only in files that declare the b2bea:exception=home_hero marker (audit-b2bea.js)",
+      "L1: every token in b2bea.css :root matches its declaration in tokens.colors (audit-contrast.mjs)",
+      "L1: every pair in audit.contrastPairs meets its WCAG threshold (audit-contrast.mjs)",
+      "L2: every HTML page has lang, exactly one h1, non-skipping heading order, alt on every img, accessible name on icon-only buttons/links, label on every form field, and the four semantic landmarks (audit-a11y.mjs)",
+      "L2: every element with a known b2bea-* class composition resolves to a color pair that passes 3:1 (audit-a11y.mjs)"
+    ],
+    "thresholds": {
+      "text": 4.5,
+      "large-text": 3.0,
+      "ui-state": 3.0,
+      "focus-ring": 3.0,
+      "perElementComposition": 3.0
+    },
+    "contrastPairs": [
+      { "fg": "text", "bg": "background", "kind": "text", "reason": "Body text on page background" },
+      { "fg": "text", "bg": "surface", "kind": "text", "reason": "Body text on tinted surface" },
+      { "fg": "text", "bg": "card", "kind": "text", "reason": "Body text on card surface" },
+      { "fg": "muted", "bg": "background", "kind": "text", "reason": "Muted text on page background" },
+      { "fg": "muted", "bg": "surface", "kind": "text", "reason": "Muted text on tinted surface" },
+      { "fg": "muted", "bg": "card", "kind": "text", "reason": "Muted text on card surface" },
+      { "fg": "primary", "bg": "background", "kind": "text", "reason": "Primary text / link / outline-button label on page" },
+      { "fg": "primary", "bg": "card", "kind": "text", "reason": "Primary text on card surface" },
+      { "fg": "inverse", "bg": "primary", "kind": "text", "reason": "Inverse text on navy (hero, primary button label, footer)" },
+      { "fg": "inverse", "bg": "primaryHover", "kind": "text", "reason": "Primary button label on hover fill" },
+      { "fg": "inverse", "bg": "accent", "kind": "large-text", "reason": "Accent CTA button label (14px bold; WCAG large-text bar applies)" },
+      { "fg": "inverse", "bg": "accentHover", "kind": "large-text", "reason": "Accent CTA button label on hover fill" },
+      { "fg": "primary", "bg": "primaryHover", "kind": "ui-state", "reason": "Primary button default vs hover affordance" },
+      { "fg": "accent", "bg": "accentHover", "kind": "ui-state", "minRatio": 1.5, "reason": "Accent button default vs hover. Honest constraint: the brand's mid-luminance coral cannot reach the WCAG 1.4.11 strict 3:1 state-change contrast via a fill-only shift while keeping white text readable on the hover fill (the two are mutually exclusive: 3:1 darker pushes the hover into deep-burgundy territory that loses the coral identity; 3:1 lighter pushes into pale-peach territory where white text fails). Chosen tradeoff is a clearly-perceptible 1.5:1 minimum (deeper, more saturated coral on hover — ~1.7:1 actual). Floor is 1.5 to keep the audit catching hovers that drift back below human-perceptible threshold." },
+      { "fg": "success", "bg": "background", "kind": "text", "reason": "Success-state text (success toast, validation pass)" },
+      { "fg": "warning", "bg": "background", "kind": "text", "reason": "Warning-state text (warning toast, validation caution)" },
+      { "fg": "inverse", "bg": "success", "kind": "large-text", "reason": "Inverse text on success-filled chips/buttons" },
+      { "fg": "inverse", "bg": "warning", "kind": "large-text", "reason": "Inverse text on warning-filled chips/buttons" }
     ]
   }
 }

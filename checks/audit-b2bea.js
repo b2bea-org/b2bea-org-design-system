@@ -17,6 +17,11 @@ function inspect(file) {
   const text = fs.readFileSync(file, "utf8");
   const rel = path.relative(root, file);
 
+  // Parked references (POCs, captured designs) opt out of the audit by declaring
+  // b2bea:audit=skip. They exist on disk for future use but aren't part of the
+  // live contract surface.
+  if (/b2bea:audit=skip/.test(text)) return;
+
   if (/Hanken Grotesk/i.test(text)) {
     findings.push([rel, "Legacy Hanken Grotesk reference found. Lovable target pages use Open Sans."]);
   }
@@ -25,8 +30,8 @@ function inspect(file) {
     findings.push([rel, "Negative letter spacing found. Standard B2BEA Lovable surfaces use normal letter spacing."]);
   }
 
-  if (/font-size:\s*clamp\(3rem,\s*7vw,\s*6rem\)/.test(text) && !/marketing|hero exception|custom_html/i.test(text)) {
-    findings.push([rel, "Marketing hero title scale found without an explicit exception marker."]);
+  if (/font-size:\s*clamp\(3rem,\s*7vw,\s*6rem\)/.test(text) && !/b2bea:exception=home_hero/.test(text)) {
+    findings.push([rel, "Marketing-scale hero clamp present without the b2bea:exception=home_hero marker."]);
   }
 }
 
