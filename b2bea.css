@@ -839,6 +839,66 @@ button.b2bea-card:hover {
   font-size: 0.75rem;
 }
 
+.b2bea-job-list {
+  display: grid;
+  gap: var(--b2bea-space-4);
+}
+
+.b2bea-job-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--b2bea-space-3);
+  padding: var(--b2bea-space-5);
+  text-decoration: none;
+}
+
+.b2bea-job-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--b2bea-space-4);
+}
+
+.b2bea-job-card__title {
+  margin: 0;
+  font-family: var(--b2bea-font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--b2bea-color-text);
+}
+
+.b2bea-job-card__company,
+.b2bea-job-card__meta,
+.b2bea-job-card__salary {
+  margin: 0;
+  color: var(--b2bea-color-muted);
+  font-size: 0.875rem;
+}
+
+.b2bea-job-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--b2bea-space-2);
+}
+
+.b2bea-job-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--b2bea-space-2) var(--b2bea-space-5);
+}
+
+@media (max-width: 640px) {
+  .b2bea-job-card__header {
+    flex-direction: column;
+  }
+
+  .b2bea-job-card__tags {
+    justify-content: flex-start;
+  }
+}
+
 .b2bea-partner-card {
   display: flex;
   flex-direction: column;
