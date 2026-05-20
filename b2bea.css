@@ -991,6 +991,9 @@ button.b2bea-card:hover {
 }
 
 .b2bea-event-card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: stretch;
   min-height: 100%;
   background: var(--b2bea-color-surface);
@@ -998,10 +1001,10 @@ button.b2bea-card:hover {
 }
 
 .b2bea-event-card__media img {
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: none;
   object-fit: contain;
-  object-position: center;
 }
 
 @media (max-width: 900px) {
