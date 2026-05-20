@@ -99,7 +99,7 @@ a:hover {
 .b2bea-article-hero {
   background: var(--b2bea-color-background);
   color: var(--b2bea-color-text);
-  padding: var(--b2bea-space-8) var(--b2bea-space-6) var(--b2bea-space-10);
+  padding: var(--b2bea-space-8) var(--b2bea-space-6) var(--b2bea-space-7);
 }
 
 .b2bea-article-hero__inner {
@@ -120,11 +120,11 @@ a:hover {
 
 .b2bea-article-hero__title {
   margin: 0;
-  color: var(--b2bea-color-text);
+  color: var(--b2bea-color-primary);
   font-family: var(--b2bea-font-display);
-  font-size: clamp(2.25rem, 4vw, 4rem);
-  font-weight: 800;
-  line-height: 1.05;
+  font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.08;
 }
 
 .b2bea-article-hero__dek {
@@ -150,6 +150,14 @@ a:hover {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.b2bea-article-hero + .b2bea-section--compact {
+  padding-top: 0;
+}
+
+.b2bea-article-hero + .b2bea-section--compact + .b2bea-section {
+  padding-top: var(--b2bea-space-8);
 }
 
 .b2bea-page-hero__inner {
@@ -637,7 +645,7 @@ button.b2bea-card:hover {
   }
 
   .b2bea-article-hero {
-    padding: var(--b2bea-space-6) var(--b2bea-space-4) var(--b2bea-space-8);
+    padding: var(--b2bea-space-6) var(--b2bea-space-4);
   }
 
   .b2bea-article-hero__breadcrumb {
@@ -892,6 +900,8 @@ button.b2bea-card:hover {
   flex-direction: column;
   gap: var(--b2bea-space-3);
   padding: var(--b2bea-space-5);
+  color: var(--b2bea-color-text);
+  text-decoration: none;
 }
 
 .b2bea-resource-card__media {
@@ -924,7 +934,7 @@ button.b2bea-card:hover {
   font-size: 1.125rem;
   font-weight: 800;
   line-height: 1.3;
-  color: var(--b2bea-color-text);
+  color: var(--b2bea-color-primary);
 }
 
 .b2bea-resource-card__excerpt {
@@ -944,7 +954,8 @@ button.b2bea-card:hover {
 }
 
 .b2bea-content-media {
-  aspect-ratio: 7 / 2;
+  aspect-ratio: 4 / 1;
+  max-height: 22rem;
   margin: 0;
   border-radius: var(--b2bea-radius);
   background: var(--b2bea-color-surface);
@@ -979,6 +990,10 @@ button.b2bea-card:hover {
 .b2bea-content-layout__aside {
   grid-area: aside;
   min-width: 0;
+}
+
+.b2bea-content-layout__aside .b2bea-panel {
+  border-top: 0.25rem solid var(--b2bea-color-primary);
 }
 
 .b2bea-content-layout--no-toc {
