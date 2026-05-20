@@ -96,6 +96,62 @@ a:hover {
   padding-block: var(--b2bea-space-12);
 }
 
+.b2bea-article-hero {
+  background: var(--b2bea-color-background);
+  color: var(--b2bea-color-text);
+  padding: var(--b2bea-space-8) var(--b2bea-space-6) var(--b2bea-space-10);
+}
+
+.b2bea-article-hero__inner {
+  width: min(100%, 56rem);
+  margin-inline: auto;
+}
+
+.b2bea-article-hero__breadcrumb {
+  margin-bottom: var(--b2bea-space-6);
+}
+
+.b2bea-article-hero__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--b2bea-space-2);
+  margin: 0 0 var(--b2bea-space-4);
+}
+
+.b2bea-article-hero__title {
+  margin: 0;
+  color: var(--b2bea-color-text);
+  font-family: var(--b2bea-font-display);
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.b2bea-article-hero__dek {
+  max-width: 44rem;
+  margin: var(--b2bea-space-5) 0 0;
+  color: var(--b2bea-color-muted);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.b2bea-article-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--b2bea-space-2);
+  margin: var(--b2bea-space-5) 0 0;
+  color: var(--b2bea-color-muted);
+  font-size: 0.9375rem;
+}
+
+.b2bea-article-hero__meta a {
+  color: var(--b2bea-color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .b2bea-page-hero__inner {
   width: min(100%, 64rem);
   margin-inline: auto;
@@ -474,6 +530,26 @@ a:hover {
   border-radius: var(--b2bea-radius-sm);
 }
 
+.b2bea-prose blockquote {
+  margin: var(--b2bea-space-6) 0;
+  border-left: 0.25rem solid var(--b2bea-color-accent);
+  padding: var(--b2bea-space-4) var(--b2bea-space-5);
+  background: var(--b2bea-color-surface);
+  color: var(--b2bea-color-primary);
+  font-family: var(--b2bea-font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.b2bea-prose blockquote > * {
+  margin: 0;
+}
+
+.b2bea-prose li + li {
+  margin-top: var(--b2bea-space-2);
+}
+
 .b2bea-pill,
 .b2bea-badge,
 .b2bea-status {
@@ -558,6 +634,22 @@ button.b2bea-card:hover {
 
   .b2bea-page-hero {
     padding-block: 3rem 2.25rem;
+  }
+
+  .b2bea-article-hero {
+    padding: var(--b2bea-space-6) var(--b2bea-space-4) var(--b2bea-space-8);
+  }
+
+  .b2bea-article-hero__breadcrumb {
+    margin-bottom: var(--b2bea-space-5);
+  }
+
+  .b2bea-article-hero__title {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .b2bea-article-hero__dek {
+    font-size: 1rem;
   }
 }
 
