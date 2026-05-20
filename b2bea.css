@@ -991,10 +991,8 @@ button.b2bea-card:hover {
 }
 
 .b2bea-event-card__media {
-  align-self: center;
-  margin: var(--b2bea-space-4);
-  aspect-ratio: 16 / 9;
-  border-radius: var(--b2bea-radius-sm);
+  align-self: stretch;
+  min-height: 100%;
   background: var(--b2bea-color-surface);
   overflow: hidden;
 }
@@ -1003,6 +1001,7 @@ button.b2bea-card:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 @media (max-width: 900px) {
