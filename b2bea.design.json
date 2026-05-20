@@ -137,6 +137,7 @@
       "b2bea-filterbar__select",
       "b2bea-grid",
       "b2bea-grid--resources",
+      "b2bea-grid--partners",
       "b2bea-field-row"
     ],
     "typography": [
@@ -246,7 +247,14 @@
       "b2bea-resource-card__excerpt",
       "b2bea-resource-card__footer",
       "b2bea-resource-card__media",
-      "b2bea-resource-card__title"
+      "b2bea-resource-card__title",
+      "b2bea-partner-card",
+      "b2bea-partner-card__excerpt",
+      "b2bea-partner-card__footer",
+      "b2bea-partner-card__header",
+      "b2bea-partner-card__logo",
+      "b2bea-partner-card__tags",
+      "b2bea-partner-card__title"
     ],
     "app": [
       "b2bea-app-shell",
