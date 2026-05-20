@@ -254,7 +254,21 @@
       "b2bea-partner-card__header",
       "b2bea-partner-card__logo",
       "b2bea-partner-card__tags",
-      "b2bea-partner-card__title"
+      "b2bea-partner-card__title",
+      "b2bea-event-list",
+      "b2bea-event-card",
+      "b2bea-event-card__body",
+      "b2bea-event-card__date",
+      "b2bea-event-card__day",
+      "b2bea-event-card__excerpt",
+      "b2bea-event-card__header",
+      "b2bea-event-card__media",
+      "b2bea-event-card__meta",
+      "b2bea-event-card__month",
+      "b2bea-event-card__organizer",
+      "b2bea-event-card__tags",
+      "b2bea-event-card__title",
+      "b2bea-event-card__year"
     ],
     "app": [
       "b2bea-app-shell",
