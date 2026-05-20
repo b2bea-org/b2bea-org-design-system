@@ -92,6 +92,10 @@ a:hover {
   text-align: center;
 }
 
+.b2bea-page-hero--article {
+  padding-block: var(--b2bea-space-12);
+}
+
 .b2bea-page-hero__inner {
   width: min(100%, 64rem);
   margin-inline: auto;
@@ -108,6 +112,10 @@ a:hover {
   letter-spacing: 0;
 }
 
+.b2bea-page-hero--article h1 {
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+}
+
 .b2bea-subtitle,
 .b2bea-page-hero p {
   max-width: 48rem;
@@ -115,6 +123,10 @@ a:hover {
   color: rgba(255, 255, 255, 0.82);
   font-size: 1.125rem;
   line-height: 1.65;
+}
+
+.b2bea-page-hero--article p {
+  margin-top: var(--b2bea-space-4);
 }
 
 .b2bea-icon {
@@ -837,6 +849,76 @@ button.b2bea-card:hover {
   padding-top: var(--b2bea-space-2);
   color: var(--b2bea-color-muted);
   font-size: 0.75rem;
+}
+
+.b2bea-content-media {
+  aspect-ratio: 7 / 2;
+  margin: 0;
+  border-radius: var(--b2bea-radius);
+  background: var(--b2bea-color-surface);
+  overflow: hidden;
+}
+
+.b2bea-content-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.b2bea-content-layout {
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) minmax(0, 65ch) minmax(12rem, 18rem);
+  grid-template-areas: "toc main aside";
+  align-items: start;
+  justify-content: center;
+  gap: var(--b2bea-space-8);
+}
+
+.b2bea-content-layout__toc {
+  grid-area: toc;
+}
+
+.b2bea-content-layout__main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.b2bea-content-layout__aside {
+  grid-area: aside;
+  min-width: 0;
+}
+
+.b2bea-content-layout--no-toc {
+  grid-template-columns: minmax(0, 65ch) minmax(12rem, 18rem);
+  grid-template-areas: "main aside";
+}
+
+@media (max-width: 1100px) {
+  .b2bea-content-layout {
+    grid-template-columns: minmax(0, 65ch) minmax(12rem, 18rem);
+    grid-template-areas:
+      "main aside"
+      "toc aside";
+  }
+
+  .b2bea-content-layout--no-toc {
+    grid-template-areas: "main aside";
+  }
+}
+
+@media (max-width: 820px) {
+  .b2bea-content-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .b2bea-content-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "main"
+      "toc"
+      "aside";
+  }
 }
 
 .b2bea-job-list {
