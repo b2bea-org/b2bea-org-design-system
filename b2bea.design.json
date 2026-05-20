@@ -118,6 +118,7 @@
       "b2bea-container",
       "b2bea-page",
       "b2bea-section",
+      "b2bea-section--compact",
       "b2bea-page-hero",
       "b2bea-page-hero--home",
       "b2bea-page-hero__inner",
@@ -131,7 +132,11 @@
       "b2bea-footer__legal",
       "b2bea-footer__list",
       "b2bea-toolbar",
+      "b2bea-filterbar",
+      "b2bea-filterbar__search",
+      "b2bea-filterbar__select",
       "b2bea-grid",
+      "b2bea-grid--resources",
       "b2bea-field-row"
     ],
     "typography": [

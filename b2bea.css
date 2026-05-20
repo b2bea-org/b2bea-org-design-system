@@ -81,6 +81,10 @@ a:hover {
   padding-block: var(--b2bea-space-16);
 }
 
+.b2bea-section--compact {
+  padding-block: var(--b2bea-space-8);
+}
+
 .b2bea-page-hero {
   background: var(--b2bea-color-primary);
   color: var(--b2bea-color-inverse);
@@ -1396,8 +1400,12 @@ button.b2bea-card:focus-visible {
 
 .b2bea-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--b2bea-grid-min, 16rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--b2bea-grid-min, 16rem)), 1fr));
   gap: var(--b2bea-space-5);
+}
+
+.b2bea-grid--resources {
+  --b2bea-grid-min: 24rem;
 }
 
 .b2bea-toolbar {
@@ -1405,6 +1413,22 @@ button.b2bea-card:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--b2bea-space-3);
+}
+
+.b2bea-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--b2bea-space-3);
+  margin-bottom: var(--b2bea-space-8);
+}
+
+.b2bea-filterbar__search {
+  flex: 1 1 24rem;
+}
+
+.b2bea-filterbar__select {
+  flex: 0 1 13rem;
 }
 
 .b2bea-accordion {
