@@ -504,6 +504,7 @@ a:hover {
 
 .b2bea-card {
   overflow: hidden;
+  text-decoration: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -799,6 +800,10 @@ button.b2bea-card:hover {
 }
 
 .b2bea-resource-card__category {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--b2bea-space-2);
   color: var(--b2bea-color-accent);
   font-size: 0.75rem;
   font-weight: 800;
